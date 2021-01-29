@@ -1,0 +1,92 @@
+<div class="container">	
+            <div class="row">	
+                <div class="col-md-12">
+                    <div style="padding:8px; background-color:#000;">
+                        <a class="navbar-brand" href="/"><img class="logo4all" src="/../images/logo.png"><img class="logo4mobile" src="/../images/logo4mobile.png"></a>
+                    </div>
+                </div>
+            </div>
+	        <div class="row">	
+                <div class="col-md-12">
+                    <button class="menubtn" style="border:0px;background-color:transparent;"onClick="showDiv();"><img src="/images/menubtn.png" style="height:40px;background-color:transparent;"></button>
+                </div>
+            </div>
+        </div>
+        <div id="post-header-section">
+            <!--created 125px padding-top to cater for hidden content due to fixed navbar-->
+        </div>  
+<?php
+
+    $_memberclass = new memberClass();
+    $_treeclass   = new treeClass();
+    $_allclass    = new allocationsClass();
+    $_a           = new allocationsClass();
+    $_i           = new incentivesClass();
+
+    $_n = new newsUpdatesClass();
+
+    $stmt = $_n->displayNewsUpdatesToBeApproved();
+
+?>
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading" style="padding-left:5px;">Hot Topics</div>
+                <ul>
+                    <?php
+                        while($_row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    ?>
+                            <li style="padding-left:5px;color:red! important;"><a style="color:#5891ea;" href="/home/news/<?php echo $_row['trans_id']?>"><?php echo $_row['title']?></a></li>
+                            <hr />  
+                    <?php
+                        }
+                    ?>                  
+                </ul>                
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading">News Updates</div>
+                    <hr />
+                    <div class="body">
+                        <div class="row">
+                            
+                            
+                                <?php
+                                    if(!empty($this->getId())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+
+                                        $stmt = $_n->getSelectedNews($this->getId());
+
+                                        foreach($stmt as $i){
+                                            
+                                ?>  
+                                <div class="col-md-12">
+                                    <h5><?php echo $i['title'];?></h5>
+                                    [<h style="color:#ea6343;font-size:13px; font-style:italic;">Created on <?php echo date('d M Y',strtotime($i['timestamp']))?> </h>]
+                                </div>
+                                <?php
+                                    if($i['image']<>''){
+                                ?>
+                                    <div class="col-md-6"> 
+                                    <br />                                        
+                                        <a href="<?php echo $i['image']?>" target="_blank"><img src="<?php echo $i['image']?>"  class="poster" alt="News" style="width:100%! important"/></a>                                                                                       
+                                    </div>
+                                <?php
+                                    }
+                                ?> 
+                                <div class="col-md-6">                                                                                
+                                    <p style="white-space:pre-line;"><?php echo $i['news'];?></p>
+                                </div>
+                                <?php       
+                                        }
+                                    }
+				                ?>
+                            
+                        </div>
+                    </div>						
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

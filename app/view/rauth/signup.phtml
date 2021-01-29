@@ -1,0 +1,180 @@
+
+<div class="page-banner-area item-bg3">
+    <div class="container">
+        <div class="page-banner-content">
+            <h2>Register Account</h2>
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>Open account</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Banner -->
+
+<!-- Start Open Account Banner -->
+<section class="open-account-area ptb-100">
+    <div class="container">
+        <div class="section-title">
+            <h2>Register Your Wallet Booster Account</h2>
+        </div>
+
+        <div class="open-account-form">
+            <form action="" method="post" autocomplete="off">
+                <div style="color: red" id="error_message">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label for="Sponsor">Upliner</label>
+                            <input class="form-control" name="Sponsor" value="<?php echo $this->getSponsor();?>" id="Sponsor" type="text" required readonly>
+                            <div id="sponsor_tick"></div>
+                            <div id="error_sponsor"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label for="Country">Country</label>
+                            <select class="form-control" name="Country" id="Country" onChange="populateCountryCode()" required>
+                                <?php
+                                $_regions 	= new regionClass();
+                                $_countries = $_regions->getAllRegions();
+                                $_count 	= $_countries->rowCount();
+                                if($_count==0){
+                                    ?>
+                                    <option value="ZA">South Africa</option>
+                                    <?php
+                                }else{
+                                    ?>
+                                    <option value="ZA">South Africa</option>
+                                    <?php
+                                    foreach ($_countries as $_row) {
+                                        ?>
+                                        <option value="<?php echo $_row['iso'];?>"><?php echo $_row['country'];?></option>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <div id="error_countrycode"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label for="Firstname">Name</label>
+                            <input class="form-control" placeholder="Name" name="Firstname" id="Firstname" type="text" required>
+                            <div id="error_name"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label>Surname</label>
+                            <input type="text" class="form-control" placeholder="Surname" name="Lastname" id="Lastname">
+                            <div id="error_lastname"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label for="EmailAddress">Email Address</label>
+                            <input type="email" name="EmailAddress" id="EmailAddress" class="form-control" placeholder="Your Email Address" required>
+                            <div id="error_email"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label for="MobileNumber">Cellphone Number</label>
+                            <input type="text" name="MobileNumber"   id="MobileNumber" value="+27" class="form-control" required>
+                            <div id="error_mobilenumber"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <div class="form-group">
+                            <label for="Username">Username</label>
+                            <input type="text" class="form-control" name="Username" id="Username" placeholder="Username">
+                            <div id="error_username"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input name="Password" id="Password" type="password" autocomplete="off" required class="form-control">
+                            <div id="error_password_2"></div>
+                            <div id="pass" style="display:none;">
+                                <div class="error_password" id="error_password">
+                                </div>
+
+                                <div class="showpassword">
+                                    <img src="/images/showpassword.png" id="ShowPassword" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <div class="form-group">
+                            <label for="ConfirmPassword">Password Confirmation</label>
+                            <input name="ConfirmPassword" id="ConfirmPassword" type="password" class="form-control" required>
+                            <div id="error_confirmpassword"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <h3>Bank Account Information</h3>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="AccHolder">Bank Account Holder</label>
+                                    <input name="AccHolder" id="AccHolder" type="text" class="form-control" required placeholder="Bank Account Holder">
+                                    <div id="error_accholder"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="Bank">Bank</label>
+                                    <input class="form-control" name="Bank" id="Bank" type="text" required placeholder="Name of Bank">
+                                    <div id="error_bank"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="AccNumber">Account Number</label>
+                                    <input name="AccNumber" id="AccNumber" type="text" required class="form-control" placeholder="Account Number">
+                                    <div id="error_accnumber"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="branchCode">Branch Code</label>
+                                    <input name="branchCode" id="branchCode" type="text" required class="form-control" placeholder="Branch Code">
+                                    <div id="error_branchcode"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="banner-form-btn">
+                            <button type="submit" name="Register" id="Register" class="default-btn">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

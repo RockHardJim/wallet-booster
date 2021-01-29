@@ -1,0 +1,204 @@
+<div style="margin-top:100px;">
+</div>
+<div class="container">
+    <div class="row">
+    <div class="col-md-12" style="overflow:auto;">
+        <?php
+            $_obj = new memberClass();
+            $stmt = $_obj->getMemberDetails(ME);
+            $_row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $_obj = new bankClass();
+            $stmt = $_obj->getBankingDetails(ME);
+            $_row2 = $stmt->fetch(PDO::FETCH_ASSOC);
+        ?>              
+                <!--<div class="col-md-12" style="overflow:auto;">
+
+                <form action="" method="POST">
+                    <input type="radio" name="option" id="option" value="All"> &nbsp; All<br />
+                    <input type="radio" name="option" id="option" value="Reg_Fee_Pending"> &nbsp; Pending Reg Fee<br />
+                    <input type="radio" name="option" id="option" value="Reg_Fee_Paid"> &nbsp; Paid Reg Fee<br>
+                    <input type="radio" name="option" id="option" value="Incentives_Pending"> &nbsp; Pending Incentives<br>
+                    <input type="radio" name="option" id="option" value="Incentives_Paid"> &nbsp; Paid Incentives<br>
+                </form> -->
+
+                <?php
+                     //echo $this->getRadio();
+                ?>
+                    <br />
+                    <!--<h5 style="font-weight:bold;">Transactions</h5><br />-->
+        			<div id="error_message">
+                        <?php
+                            $_obj = new allocationsClass();
+                            $_results = $_obj->getAllMemberAllocation(ME);                                                  
+                        ?>
+                    </div>	
+        			<table style="width:99%;">
+                        <tr>
+                            <th>
+                                Trans#
+                            </th>
+                            <th>
+                                Payer
+                            </th>
+                            <th>
+                                Receiver
+                            </th>
+                            <th>
+                                Amount
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Finish
+                            </th>
+                            <th>
+                                Undo
+                            </th>
+                            <th>
+                                PoP
+                            </th>
+                            <th>
+                                Timestamp
+                            </th>
+                        </tr>
+
+                        <?php 
+                            $_dis = '';
+                            $_dis_2 = '';
+                            $_counter=0;
+                            while($_row = $_results->Fetch(PDO::FETCH_ASSOC)){
+                                $_counter += 1;
+                                if($_row['status']=='Paid' && $_row['description']<>'Reg Fee'){
+                                    $_dis = 'disabled';
+                                    $_color = 'green';
+                                    $_dis_2 = '';
+                                }elseif($_row['description']=='Reg Fee')
+                                {
+                                    $_dis = 'disabled';
+                                    $_color = 'purple';
+                                    $_dis_2 = 'disabled';
+                                }
+                                else{
+                                    $_color = 'red';
+                                    $_dis = '';
+                                    $_dis_2 = 'disabled';
+                                }   
+                                
+                                if($_row['payer']==ME){
+                                    $_sign = '-';
+                                    $_color = 'red';
+                                }else{
+                                    $_sign = '+';
+                                    $_color = 'green';
+                                }
+                        ?>
+
+                         <tr>
+                            <td>
+                                <?php echo $_row['trans_id']?>
+                            </td>
+                            <td>
+                                <?php                                    
+                                    if(!($_row['payer']=='1000')){
+                                        $_m = new memberClass();
+                                        $_r = $_m->getMemberDetails($_row['payer']);
+
+                                        $_row_m = $_r->Fetch(PDO::FETCH_ASSOC);
+
+                                        echo $_row_m['firstname'].'  '.$_row_m['lastname'].'<br />';
+                                        echo $_row_m['username'].'  TAXI'.$_row_m['member_no'].'<br />';
+
+                                    }else{
+                                        echo 'Admin';
+                                    }
+                                        
+                                ?>
+                            </td>
+                            <td>
+                                <?php                                    
+                                    if(!($_row['receiver']=='1000')){
+                                        $_b = new bankClass();
+                                        $_rb = $_b->getBankingDetails($_row['receiver']);
+
+                                        $_m = new memberClass();
+                                        $_rm = $_m->getMemberDetails($_row['receiver']);
+
+                                        $_row_m = $_rm->Fetch(PDO::FETCH_ASSOC);
+                                        $_row_b = $_rb->Fetch(PDO::FETCH_ASSOC);
+
+                                        echo $_row_m['firstname'].'  '.$_row_m['lastname'].'<br />';
+                                        echo $_row_m['mobile'].'<br /><br />';
+                                        echo '<h6 style="color:black; font-size:14px;">Banking Details</h6>';
+                                        echo $_row_b['accholder'].'<br />';
+                                        echo $_row_b['bank'].'<br />';
+                                        echo $_row_b['accnumber'].'<br />';
+
+                                    }else{
+                                        echo 'Admin';
+                                    }
+                                        
+                                ?>
+                            </td>
+                            <td>
+                                <?php echo '<h style="font-weight:bold;color:'.$_color.'">('.$_sign.')R'.$_row['amount'].'</h>'; ?>
+                            </td>
+                            <td>
+                                <?php echo $_row['description'];?>
+                            </td>
+                            <td>
+                                <?php echo $_row['status'];?>
+                            </td>
+                            
+                            <td>
+                                <form action="" method="">
+                                    <input type="hidden" id="<?php echo 'hidden_trans_no'.$_counter;?>" name="<?php echo 'hidden_trans_no'.$_counter;?>" value="<?php echo $_row['trans_id'];?>" />
+                                    <input 
+                                        class="btn btn-primary btn-sm float-center" 
+                                        type="button" 
+                                        onclick = "return confirm('Incentive Paid?')?setIncentiveToPaid(<?php echo $_counter; ?>):''"
+                                        name="Paid" 
+                                        value="Complete" 
+                                        id="<?php echo 'paid'.$_counter;?>" 
+                                        <?php echo $_dis; ?>
+                                    />
+                                </form>   
+                            </td> 
+                            <td>
+                                <form action="" method="">
+                                    <input type="hidden" id="<?php echo 'hidden_trans_no'.$_counter;?>" name="<?php echo 'hidden_trans_no'.$_counter;?>" value="<?php echo $_row['trans_id'];?>" />
+                                    <input 
+                                        class="btn btn-danger btn-sm float-center" 
+                                        type="button" 
+                                        onclick = "return confirm('Incentive Not Paid?')?setIncentiveToPending(<?php echo $_counter; ?>):''"
+                                        name="Pending" 
+                                        value="Undo" 
+                                        id="<?php echo 'paid'.$_counter;?>" 
+                                        <?php echo $_dis_2; ?>
+                                    />
+                                </form>   
+                            </td>
+                            <td>
+                                <?php
+                                    if($_row['pop']<>''){
+                                        echo '<a href="'.$_row['pop'].'" target="_blank">OPEN</a>';
+                                    }                                   
+                                ?>
+                            </td>
+                            <td>
+                                <?php echo $_row['timestamp']?>
+                            </td>
+                        </tr>    
+                        <?php 
+                            }
+                        ?>                  
+                        
+                    </table>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                </div> 
+    </div>
+</div>

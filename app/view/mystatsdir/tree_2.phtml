@@ -1,0 +1,230 @@
+<?php
+    /*if(!isset($_SESSION['dl'])){
+        header('Location: /home/index/');
+    }*/
+
+    $_memberclass = new memberClass();
+    $_treeclass   = new treeClass();
+    $_allclass    = new allocationsClass();
+    $_obj         = new incentivesClass();
+    $_results     = $_obj->getAllIncentives($_SESSION['dl']); 
+
+?>
+
+
+<?php
+
+    $_m = new memberClass();
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+
+?>
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading" >My menu</div>
+                <ul>
+                    <li><a href="/mystatsdir/index">Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/profile">Member Profile</a></li>
+                    <hr />
+                    <!--<hr />
+                    <li><a href="/mystatsdir/Notifications">News update</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/Events">Upcoming events</a></li>-->                
+                    <li><a href="/mystatsdir/In">Payments Received</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/Out">Payments Sent</a></li>  
+                    <hr />              
+                    <li><a href="/mystatsdir/tree">Tree</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/teamList">All team members</a></li> 
+                    <hr />                                         
+                </ul>
+                <a href="/auth/logout/"><button class="btn btn-danger btn-sm btn-block">Sign Out</button></a>
+            </div>    
+            
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading"><?php echo $_m->getUsername($_SESSION['dl']);?> tree</div>
+                <hr />
+                <div class="body">
+                    <h6 style="text-align:right;font-size:15px;padding"><img src="/images/login.png" style="height:20px;">I am <strong><?php echo $_SESSION['username'];?></strong></h6>
+                    <!--Start pasting here-->
+                    <?php
+                        $_obj = new treeClass();
+                        $_mem = new memberClass();
+                        $_my_tree = array($_SESSION['dl']);
+                        $_my_tree = $_obj->populateTree($_my_tree);
+                    ?> 
+
+                    &nbsp;&nbsp;<button onClick="displayLevel('1')" id="l1" class="btn-light btn-sm">L 1</button>
+                    &nbsp;&nbsp;<button onClick="displayLevel('2')" id="l1" class="btn-light btn-sm">L 2</button>
+                    &nbsp;&nbsp;<button onClick="displayLevel('3')" id="l1" class="btn-light btn-sm">L 3</button>
+                    &nbsp;&nbsp;<button onClick="displayLevel('4')" id="l1" class="btn-light btn-sm">L 4</button>
+                    &nbsp;&nbsp;<button onClick="displayLevel('5')" id="l1" class="btn-light btn-sm">L 5</button>
+                    &nbsp;&nbsp;<button onClick="displayLevel('6')" id="l1" class="btn-light btn-sm">L 6</button><br /><br />
+                                        
+                    <ul id="org" style="display:none;">
+                        <li><?php echo $_mem->getName($_SESSION['dl']);?>
+                            <?php 
+                                if ($_SESSION['level'] > 0){
+                            ?>
+                            <ul>
+                                
+                                <?php 
+                                    foreach($_my_tree as $_tree){ 
+                                        $_status = '';    
+                                        if($_tree>0){
+                                            if($_mem->isActive_2($_tree)){
+                                                $_status = '<h style="color:brown;">Approved</h>';
+                                            }else{
+                                                $_status = '<h style="color:red;">Inactive</h>';
+                                            }
+                                            echo  '<li>'.$_mem->getUsername($_tree).'<br/>'.$_status.'<br />Stage '.$_allclass->getStageCompleted($_tree);                                                        
+                                                $_my_tree_1 = $_obj->populateTree(array($_tree));
+                                                if ($_SESSION['level'] > 1){
+                                                echo '<ul>';
+                                                    foreach($_my_tree_1 as $_tree_1){     
+                                                        if($_tree_1>0){
+                                                            if($_mem->isActive_2($_tree_1)){
+                                                                $_status = '<h style="color:brown;">Approved</h>';
+                                                            }else{
+                                                                $_status = '<h style="color:red;">Inactive</h>';
+                                                            }
+                                                            echo  '<li>'.$_mem->getUsername($_tree_1).'<br/>'.$_status.'<br />Stage '.$_allclass->getStageCompleted($_tree_1);                                                 
+                                                                $_my_tree_2 = $_obj->populateTree(array($_tree_1));
+                                                                if ($_SESSION['level'] > 2){
+                                                                echo '<ul>';
+                                                                    foreach($_my_tree_2 as $_tree_2){     
+                                                                        if($_tree_2>0){
+                                                                            if($_mem->isActive_2($_tree_2)){
+                                                                                $_status = '<h style="color:brown;">Approved</h>';
+                                                                            }else{
+                                                                                $_status = '<h style="color:red;">Inactive</h>';
+                                                                            }
+                                                                            echo  '<li>'.$_mem->getUsername($_tree_2).'<br/>'.$_status.'<br />Stage '.$_allclass->getStageCompleted($_tree_2);
+                                                                                $_my_tree_3 = $_obj->populateTree(array($_tree_2));
+                                                                                if ($_SESSION['level'] > 3){
+                                                                                echo '<ul>';
+                                                                                    foreach($_my_tree_3 as $_tree_3){     
+                                                                                        if($_tree_3>0){
+                                                                                            if($_mem->isActive_2($_tree_3)){
+                                                                                                $_status = '<h style="color:brown;">Approved</h>';
+                                                                                            }else{
+                                                                                                $_status = '<h style="color:red;">Inactive</h>';
+                                                                                            }
+                                                                                            echo  '<li>'.$_mem->getUsername($_tree_3).'<br/>'.$_status.'<br />Stage '.$_allclass->getStageCompleted($_tree_3);
+                                                                                                $_my_tree_4 = $_obj->populateTree(array($_tree_3));
+                                                                                                if ($_SESSION['level'] > 4){
+                                                                                                echo '<ul>';
+                                                                                                    foreach($_my_tree_4 as $_tree_4){     
+                                                                                                        if($_tree_4>0){
+                                                                                                            if($_mem->isActive_2($_tree_4)){
+                                                                                                                $_status = '<h style="color:brown;">Approved</h>';
+                                                                                                            }else{
+                                                                                                                $_status = '<h style="color:red;">Inactive</h>';
+                                                                                                            }
+                                                                                                            echo  '<li>'.$_mem->getUsername($_tree_4).'<br/>'.$_status.'<br />Stage '.$_allclass->getStageCompleted($_tree_4);
+                                                                                                                $_my_tree_5 = $_obj->populateTree(array($_tree_4));
+                                                                                                                if ($_SESSION['level'] > 5){
+                                                                                                                echo '<ul>';
+                                                                                                                    foreach($_my_tree_5 as $_tree_5){     
+                                                                                                                        if($_tree_5>0){
+                                                                                                                            if($_mem->isActive_2($_tree_5)){
+                                                                                                                                $_status = '<h style="color:brown;">Approved</h>';
+                                                                                                                            }else{
+                                                                                                                                $_status = '<h style="color:red;">Inactive</h>';
+                                                                                                                            }
+                                                                                                                            echo  '<li>'.$_mem->getUsername($_tree_5).'<br/>'.$_status.'<br />Stage '.$_allclass->getStageCompleted($_tree_5);
+                                                                                                                                $_my_tree_6 = $_obj->populateTree(array($_tree_5));
+                                                                                                                                if ($_SESSION['level'] > 6){
+                                                                                                                                echo '<ul>';
+                                                                                                                                    foreach($_my_tree_6 as $_tree_6){     
+                                                                                                                                        if($_tree_6>0){
+                                                                                                                                            if($_mem->isActive_2($_tree_6)){
+                                                                                                                                                $_status = '<h style="color:brown;">Approved</h>';
+                                                                                                                                            }else{
+                                                                                                                                                $_status = '<h style="color:red;">Inactive</h>';
+                                                                                                                                            }
+                                                                                                                                            echo  '<li>'.$_mem->getUsername($_tree_6).'<br/>'.$_status.'<br />Stage '.$_allclass->getStageCompleted($_tree_6);
+                                                                                                                                        
+                                                                                                                                            echo  '</li>'; 
+                                                                                                                                        }
+                                                                                                                                        else{
+                                                                                                                                            echo '<li></li>';                                   
+                                                                                                                                        }                               
+                                                                                                                                    }
+                                                                                                                                echo'</ul>'; 
+                                                                                                                                }
+                                                                                                                            echo  '</li>'; 
+                                                                                                                        }
+                                                                                                                        else{
+                                                                                                                            echo '<li></li>';                                   
+                                                                                                                        }                               
+                                                                                                                    }
+                                                                                                                echo'</ul>'; 
+                                                                                                                }
+                                                                                                            echo  '</li>'; 
+                                                                                                        }
+                                                                                                        else{
+                                                                                                            echo '<li></li>';                                   
+                                                                                                        }                               
+                                                                                                    }
+                                                                                                echo'</ul>'; 
+                                                                                            }
+                                                                                            echo '</li>'; 
+                                                                                        }
+                                                                                        else{
+                                                                                            echo '<li></li>';                                   
+                                                                                        }                               
+                                                                                    }
+                                                                                echo'</ul>'; 
+                                                                            }                                                                 
+                                                                            echo '</li>'; 
+                                                                        }
+                                                                        else{
+                                                                            echo '<li></li>';                                   
+                                                                        }                               
+                                                                    }
+                                                                echo'</ul>'; 
+                                                            }                                                                                               
+                                                            echo '</li>'; 
+                                                        }
+                                                        else{
+                                                            echo '<li></li>';                                   
+                                                        }                               
+                                                    }
+                                                echo'</ul>';
+                                            }
+                                            echo '</li>';
+
+                                        }
+                                        else{
+                                            echo '<li></li>';                                   
+                                        }                                
+                                    }
+                                ?>               
+                            </ul>
+                            <?php 
+                            }
+                            ?>
+                        </li>
+                    </ul>
+                        
+                    <div id="main">
+
+                    </div>
+                    
+					<!--End pasting here -->
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>
+
+

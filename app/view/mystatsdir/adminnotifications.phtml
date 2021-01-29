@@ -1,0 +1,155 @@
+<?php
+
+    $_m = new memberClass();
+    $_a = new allocationsClass();
+    
+
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+    $_d = new defaultsClass();
+
+?>
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading">Admin Menu</div>
+                <ul>
+                    <li><a href="/mystatsdir/admin">My Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admindefaults">Defaults</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminmembers">Members</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminpayments">Payments</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/sendBulkEmail">Send bulk email</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminnotifications">News updates</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admintestimonials">Testimonials</a></li>
+                </ul>
+                <div class="dleft_heading"> </div>
+                <ul>    
+                    <li><a href="/auth/logout/"><h style="color:red; font-weight:600;">Sign Out</h></a></li>
+                    <hr />      
+                </ul>
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading">News updates</div>
+                <div class="body" style="overflow:auto;">
+                    <div id="error_message_newsUpdates">
+
+                        <?php
+				        	if(!empty($this->getMessage())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+				        		echo '';
+				        ?>
+				        		<div class="alert <?php echo $this->getMessageType(); ?>" role="alert">									
+  				        			<?php  echo $this->getMessage(); ?>
+				        		</div>
+				        <?php
+				        	}elseif(isset($_SESSION['MESSAGE_NEWSUPDATES'])){	
+                        ?>
+                                <div class="alert alert-success" role="alert">									
+                                      <?php  
+                                            echo $_SESSION['MESSAGE_NEWSUPDATES'];
+                                            unset($_SESSION['MESSAGE_NEWSUPDATES']);
+                                      ?>
+				        		</div>
+                        <?php
+				        	}	
+				        ?>
+                    </div>                                       
+                    <!--Start payment-->  
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="width:99%;background-color:;padding:20px; border-radius:10px;">
+                                <strong>Add updates</strong>
+
+                                <div id="error_message_newsUpdates">
+
+                                </div>	
+                                <form action="/mystatsdir/addNewsUpdates" method="POST" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <input type="text" name="title" class="form-control" placeholder="Title" maxlength="49"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="news" class="form-control" placeholder="Enter your message . . . " maxlength="2300"></textarea>                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="File" id = "files" accept=".pdf,.jpg,.jpeg,.png" name="POP" class="form-control" /> 
+                                    </div>
+                                     
+                                    <input class="btn btn-secondary btn-md"  type="submit" name="UPLOAD" value="Share news" id="" /> 			
+                                </form>                                               
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <table style="width:100%">
+                            <tr>
+                                <th style="border:1px solid #000">
+                                </th>
+                                <th style="border:1px solid #000">   
+                                    Date
+                                </th>
+                                <th style="border:1px solid #000">
+                                    Poster
+                                </th>
+                                <th style="border:1px solid #000">
+                                    Title
+                                </th>
+                                <th style="border:1px solid #000">
+                                    Updates
+                                </th>
+                            </tr>
+
+                        <?php
+                            $_testmn = new newsUpdatesClass();
+                            $stmt = $_testmn->displayNewsUpdatesToBeApproved();
+
+                            $_counter = 0;
+                            $_a = 'Approved';
+                            $_d = 'Declined';
+
+                            while($_row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                $_counter += 1;
+                        ?>        
+
+                            <tr style="background-color:#f3f3c7! important">
+                                <td style="border:1px solid #000">
+                                   <form action="/mystatsdir/deleteNewsUpdates" method="POST">
+                                        <input type="hidden" name="h_trans_id" value="<?php echo $_row['trans_id'] ?>">
+                                        <button class="btn btn-outline-danger btn-sm" name="deleteNewsUpdates">Delete</button>
+                                   </form>
+                                </td>
+                                <td style="border:1px solid #000">
+                                    <?php echo date('d/m/Y', strtotime($_row['timestamp'])) ?>
+                                </td>
+                                <td style="border:1px solid #000">
+                                    <a href="<?php echo $_row['image']?>" target="_blank"> <img src="<?php echo $_row['image']?>" alt="poster" style="height:50px; margin:0 auto;padding:10px;"/></a>
+                                </td>
+                                <td style="border:1px solid #000">
+                                     <?php echo $_row['title'] ?>
+                                </td>
+                                <td style="border:1px solid #000">
+                                     <?php echo $_row['news'] ?>
+                                </td>
+                            </tr>
+                               
+                        <?php        
+                            }
+                        ?>
+                        </table>                        
+                    </div>
+                    
+                    <!--End payment-->                                                                        
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

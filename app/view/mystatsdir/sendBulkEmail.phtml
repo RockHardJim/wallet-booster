@@ -1,0 +1,91 @@
+<?php
+
+    $_m = new memberClass();
+    $_a = new allocationsClass();
+    if(!isset($_POST['searchButton']))
+        $_res = $_a->getAllAllocations();        
+    else
+        $_res = $_a->getSpecificAllocations($_POST['search']);
+    
+
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+    $_d = new defaultsClass();
+
+?>
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading">Admin Menu</div>
+                <ul>
+                    <li><a href="/mystatsdir/admin">My Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admindefaults">Defaults</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminmembers">Members</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminpayments">Payments</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/sendBulkEmail">Send bulk email</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminnotifications">News updates</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admintestimonials">Testimonials</a></li>
+                </ul>
+                <div class="dleft_heading"> </div>
+                <ul>    
+                    <li><a href="/auth/logout/"><h style="color:red; font-weight:600;">Sign Out</h></a></li>
+                    <hr />      
+                </ul>
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading">Send Bulk Emails</div>
+                <div class="body" style="overflow:auto;">
+                    <div id="error_message">
+
+                        <?php
+				        	if(!empty($this->getMessage())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+				        		echo '';
+				        ?>
+				        		<div class="alert <?php echo $this->getMessageType(); ?>" role="alert">									
+  				        			<?php  echo $this->getMessage(); ?>
+				        		</div>
+				        <?php
+				        	}	
+				        ?>
+                    </div>                                       
+                    <!--Start payment-->   
+                    <form action="/mystatsdir/SendEmails" method="POST">
+                        <div class="form-group">
+                            <label style="left:0; color:#484747;">Select category to send to</label>
+                            <select name="category" class="form-control">
+                                <option>All members</option>
+                                <option>Active</option>
+                                <option>Inactive</option>
+                                <option>Blocked</option>
+                                <option>Developer</option>
+                            </select>
+                        </div>
+                        <br >
+                        <div class="form-group">
+                            <label style="left:0; color:#484747;">Email subject</label>
+                            <input type="text" name="emailSubject" placeholder="Email subject required" class="form-control" value="<?php echo $this->getSubject(); ?>" required ></textarea>
+                        </div>
+                        <br >
+                        <div class="form-group">
+                            <label style="left:0; color:#484747;">Enter your email content here</label>
+                            <textarea name="emailText" placeholder="Enter your email content . . . " maxlength="2300" value="<?php echo $this->getEmailBody();?>" rows="10" class="form-control" required ><?php echo $this->getEmailBody();?></textarea>
+                        </div>
+                        <input class="btn btn-secondary btn-md"  type="submit" name="sendEmails" value=" Send Emails " id="" />
+                    </form>
+                    <!--End payment-->                                                                        
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

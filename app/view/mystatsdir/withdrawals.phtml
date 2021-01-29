@@ -1,0 +1,98 @@
+<div style="margin-top:100px;">
+</div>
+<div class="container">
+    <div class="row">
+        <?php
+            $_obj = new memberClass();
+            $stmt = $_obj->getMemberDetails(ME);
+            $_row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $_obj = new bankClass();
+            $stmt = $_obj->getBankingDetails(ME);
+            $_row2 = $stmt->fetch(PDO::FETCH_ASSOC);
+        ?>              
+                <div class="col-md-12" style="overflow:auto;">
+                    <h5 style="font-weight:bold;">Transactions</h5><br />
+        			<div id="error_message">
+                        <?php
+                            $_obj = new incentivesClass();
+                            $_results = $_obj->getAllIncentives(ME);                                                  
+                        ?>
+                    </div>	
+        			<table style="width:99%;">
+                        <tr>
+                            <th>
+                                Transaction Id
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Claim Incentive
+                            </th>
+                            <th>
+                                Timestamp
+                            </th>
+                        </tr>
+
+                        <?php 
+                        $_dis = '';
+                        $_counter=0;
+                        
+                        if($_results->rowCount()>0){    
+                            while($_row = $_results->Fetch(PDO::FETCH_ASSOC)){
+
+                                $_counter += 1;
+                                if($_row['status']=='Claimed'){
+                                    $_dis = 'disabled';
+                                    $_color = 'red';
+                                }
+                                else{
+                                    $_color = 'green';
+                                    $_dis = '';
+                                }
+                                    
+
+                        ?>
+
+                         <tr>
+                            <td>
+                                <?php echo $_row['trans_id']?>
+                            </td>
+                            <td>
+                                <?php echo 'Stage '.$_row['stage'].'  achieved'?>
+                            </td>
+                            <td>
+                                <?php echo '<h style="color:'.$_color.';font-weight:bold;">'.$_row['status'].'</h>'?>
+                            </td>
+                            <td>
+                                <form action="" method="">
+                                    <input type="hidden" id="<?php echo 'hidden_claim_no'.$_counter;?>" name="<?php echo 'hidden_claim_no'.$_counter;?>" value="<?php echo $_row['trans_id'];?>" />
+                                    <input 
+                                        class="btn btn-primary btn-sm float-center" 
+                                        type="button" 
+                                        onclick = "confirm('Claim Incentive?'); claimIncentive(<?php echo $_counter; ?>)"
+                                        name="Claim" 
+                                        value="Claim" 
+                                        id="<?php echo 'claim'.$_counter;?>" 
+                                        <?php echo $_dis; ?>
+                                    />
+                                </form>   
+                            </td> 
+                            <td>
+                                <?php echo $_row['timestamp']?>
+                            </td>
+                        </tr>    
+                        <?php 
+                            }
+                        }
+                        ?>                  
+                        
+                    </table>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                </div> 
+    </div>
+</div>

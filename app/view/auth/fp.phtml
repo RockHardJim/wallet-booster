@@ -1,0 +1,66 @@
+<div class='home-banner-2'>
+<div class="container-fluid">
+<br />
+	<div class="row"> 
+		<div class="col-lg-12" style="margin-top:20px;text-align:center;">
+			<img src="/images/logo4mobile.png" alt="logo" style="height:80px;padding-bottom:15px;"/>
+			<h1 style="font-weight:normal;">Retrieve password</h1>
+			<h style="font-weight:bold;">Please enter your email address and cellphone number below</h>
+			<br /><br />
+		</div>
+	</div> 
+  	<div class="row">    	
+		<div class="col-lg-4 offset-lg-4 animated zoomIn" style="margin-bottom:30px;background-color:#ececec; padding:15px;text-align:center">
+			
+							<?php
+								if(!empty($this->getMessage())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+									echo '';
+							?>
+									<div class="alert <?php echo $this->getMessageType(); ?>" role="alert">									
+  										<?php  echo $this->getMessage(); ?>
+									</div>
+							<?php
+								echo '';
+								}	
+							?>
+							<form action="/auth/fp" method="POST">
+								<div class="form-group">
+									<input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Full names" 
+										   value="" />
+												  
+								</div>
+								<div class="form-group">
+									<input type="text" name="username" id="username" tabindex="2" class="form-control" placeholder="Login Username" 
+										   value="" />
+												  
+								</div>
+								<div class="form-group">
+									<input type="text" name="email" id="email" tabindex="3" class="form-control" placeholder="My email" 
+										   value="<?php 
+																 echo !empty($this->getFailedEmail()) ? $this->getFailedEmail() : '';
+												  ?>" />
+												  
+								</div>
+								<div class="form-group">
+									<input type="text" name="mobile" id="mobile" tabindex="4" class="form-control" placeholder="Cellphone" 
+										   value="<?php 
+																 echo !empty($this->getFailedMobile()) ? $this->getFailedMobile() : '';
+												  ?>" />
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-secondary float-right"  name="login-submit" class="form-control btn" value="Send to me" required />
+								</div>
+								<div style="clear:both">
+								</div>
+                    
+							</form>	
+							<div style="text-align:left;margin-top:-40px"><a href="/auth/">&nbsp;<h style="color:#563d7c"><button class="btn btn-info_2">Sign in</button></h></a></div>
+							<br />	<br />						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
+</div>

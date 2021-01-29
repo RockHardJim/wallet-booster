@@ -1,0 +1,89 @@
+<?php
+
+    $_memberclass = new memberClass();
+    $_treeclass   = new treeClass();
+    $_allclass    = new allocationsClass();
+    $_a           = new allocationsClass();
+    $_i           = new incentivesClass();
+
+?>
+
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading">General Settings</div>
+                <ul>
+                    <li><a href="/mystatsdir/index">My Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/profile">Account Settings</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/Notifications">News update</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/Events">Upcoming events</a></li>
+                </ul>
+                <div class="dleft_heading">My Payments</div>
+                <ul>
+                    <li><a href="/mystatsdir/In">Money in (+)</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/Out">Money out (-)</a></li>
+                </ul>
+                <div class="dleft_heading">Team Members</div>
+                <ul>
+                    <li><a href="/mystatsdir/tree">Tree</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/teamList">Team list</a></li>
+                </ul>
+                <div class="dleft_heading"> </div>
+                <ul>    
+                    <li><a href="/auth/logout/"><h style="color:red; font-weight:600;">Sign Out</h></a></li>
+                    <hr />      
+                </ul>
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading">Notifications</div>
+                <div class="body">
+                    <?php
+                        $_obj = new treeClass();
+                        $_mem = new memberClass();
+                        $_my_tree = array(ME);
+                        $_my_tree = $_obj->populateTree($_my_tree);
+                        
+                    ?> 
+                    <div id="error_message">
+                    </div>
+                    <p style="margin-bottom:0px;">No notifications listed</p>                   
+                    <?php 
+                        if($_i->getUpgradeDue(ME)>0){
+                            $_row = $_i->getCurrentIncentive($_i->getUpgradeDue(ME))->fetch(PDO::FETCH_ASSOC);
+                            $_counter = 1;
+                    ?>
+                            <p style="margin-top:-10px; font-weight:bold;font-size:17px;important;color:navy;">Hooray! You have accumulated enough funds to <blink>UPGRADE TO PHASE <?php echo $_a->getStageCompleted(ME) + 1; ?></blink>
+                                <form action="" method="" style="margin-top:5px! important;width:100%;text-align:center;">
+                                    <input type="hidden" id="<?php echo 'hidden_trans_no'.$_counter;?>" name="<?php echo 'hidden_trans_no'.$_counter;?>" value="<?php echo $_row['trans_id'];?>" />
+                                    <input style="margin-top:-5px;"
+                                        class="btn btn-success btn-sm float-left" 
+                                        type="button" 
+                                        onclick = "return confirm('Are you sure?') ? upgradeFunction(<?php echo $_counter; ?>):''"
+                                        name="Upgrade" 
+                                        value="UPGRADE TO PHASE <?php echo $_a->getStageCompleted(ME) + 1; ?>" 
+                                        id="<?php echo 'Upgrade'.$_counter;?>" 
+                                    />
+                                </form>
+                                <div style="clear:both;">
+                                </div>
+                            </p>
+                    <?php                        
+                        }                          
+                    ?>
+					<!--Start pasting here-->
+					
+                    <!--End pasting here -->
+                    
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

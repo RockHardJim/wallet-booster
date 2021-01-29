@@ -1,0 +1,301 @@
+<?php
+
+    $_m = new memberClass();
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+    $_d = new defaultsClass();
+
+?>
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading">Admin Menu</div>
+                <ul>
+                    <li><a href="/mystatsdir/admin">My Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admindefaults">Defaults</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminmembers">Members</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminpayments">Payments</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/sendBulkEmail">Send bulk email</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminnotifications">News updates</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admintestimonials">Testimonials</a></li>
+                </ul>
+                <div class="dleft_heading"> </div>
+                <ul>    
+                    <li><a href="/auth/logout/"><h style="color:red; font-weight:600;">Sign Out</h></a></li>
+                    <hr />      
+                </ul>
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading">Defaults accounts</div>
+                <div class="body" style="overflow:auto;">
+                    <div id="error_message">
+
+                        <?php
+				        	if(!empty($this->getMessage())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+				        		echo '';
+				        ?>
+				        		<div class="alert <?php echo $this->getMessageType(); ?>" role="alert">									
+  				        			<?php  echo $this->getMessage(); ?>
+				        		</div>
+				        <?php
+				        	}	
+				        ?>
+                    </div>                                       
+                    <!--Start payment--> 
+                    <form action="" method="POST" style="margin-top:0px! important;"> 
+                        <input style="width:50%;height:40px;padding:5px;margin-bottom:10px"type="text" name="search" placeholder="Seach by name or username" />
+                        &nbsp;<input class="btn btn-warning btn-sm" type="submit" name="searchButton" value="Search"/>&nbsp;<input class="btn btn-primary btn-sm" type="submit" name="showAll" value="Show All"/> <br />  
+                                                                                                 
+					</form>
+                    <form action="" method="POST" style="margin-top:0px! important;"> 
+                        &nbsp;<input type="radio" name="view" value="active"    <?php echo (isset($_POST['view']) && $_POST['view']=='active')?'checked':'' ?>  checked onchange="this.form.submit();"/> Active
+                        &nbsp;<input type="radio" name="view" value="inactive"  <?php echo (isset($_POST['view']) && $_POST['view']=='inactive')?'checked':'' ?>  onchange="this.form.submit();" /> All
+                    </form>     
+                    <br />              
+                    <table>
+                        <tr>
+                            <th class="border_needed">
+                                Username
+                            </th>
+                            <th class="border_needed">
+                                Name
+                            </th>
+                            <th class="border_needed">
+                                Default
+                            </th>
+                            <th class="border_needed">
+                                Current
+                            </th>
+                            <th class="border_needed">
+                                Count
+                            </th>
+                            <th class="border_needed">
+                                Amount
+                            </th>
+                            <th class="border_needed">
+                                Action
+                            </th>
+                        </tr>
+                        <?php
+
+                        if((isset($_POST['view']) && ($_POST['view']=='inactive'))){
+                            if(!isset($_POST['searchButton']))
+                                $_fetch = $_m->getAdminAccounts();        
+                            else
+                                $_fetch = $_m->getSpecificAdminAccounts($_POST['search']);
+
+                            foreach($_fetch as $_row){
+                                $stmt2 = $_d->getDefaultAccounts($_row['member_no']);
+                                if($stmt2->rowCount()>0){
+                                    while($_row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                                    
+                                    if(isset($_POST['showAll']) or !isset($_POST['view']) or (isset($_POST['view']) && ($_POST['view']=='active' && $stmt2->rowCount()>0)) or (isset($_POST['view']) && ($_POST['view']=='inactive' && $stmt2->rowCount()>=0))){
+                                ?>
+                                        <tr>
+                                            <form action="/mystatsdir/manageDefaults/" method="POST" >
+                                                <td class="border_needed">  
+                                                    <input type="hidden" name="husername" value="<?php echo $_row['username']; ?>" />                                                
+                                                    <input style="padding:3px;height:30px;font-size:14px;background-color:transparent;"type="text" name="username" value="<?php echo $_row['username']; ?>" />
+                                                    <input style="color:white;background-color:green! important;"   type="submit" name="updateUsername" value="UPD"  />
+                                                </td>
+                                                <td class="border_needed">
+                                                    <?php echo $_row['firstname'].' '.$_row['lastname'];?>
+                                                </td>
+                                                <td class="border_needed" style="text-align:center;">
+                                                    <?php echo ($stmt2->rowCount()>=1)?'Yes':'No' ?>                                                
+                                                </td>
+                                                <td class="border_needed" style="text-align:center;">
+                                                            
+                                                         </td>
+                                                <td class="border_needed" style="text-align:center;">
+                                                    <select name="occurence" style="height:25px;"> 
+                                                        <option <?php echo ($_row2['occurences']==0)?'selected':'' ?> >0</option>
+                                                        <option <?php echo ($_row2['occurences']==1)?'selected':'' ?> >1</option>
+                                                        <option <?php echo ($_row2['occurences']==2)?'selected':'' ?> >2</option>
+                                                        <option <?php echo ($_row2['occurences']==3)?'selected':'' ?> >3</option>
+                                                        <option <?php echo ($_row2['occurences']==4)?'selected':'' ?> >4</option>
+                                                        <option <?php echo ($_row2['occurences']==5)?'selected':'' ?> >5</option>
+                                                        <option <?php echo ($_row2['occurences']==6)?'selected':'' ?> >6</option>
+                                                        <option <?php echo ($_row2['occurences']==7)?'selected':'' ?> >7</option>
+                                                        <option <?php echo ($_row2['occurences']==8)?'selected':'' ?> >8</option>
+                                                        <option <?php echo ($_row2['occurences']==9)?'selected':'' ?> >9</option>
+                                                        <option <?php echo ($_row2['occurences']==10)?'selected':'' ?> >10</option>
+                                                        <option <?php echo ($_row2['occurences']==11)?'selected':'' ?> >11</option>
+                                                        <option <?php echo ($_row2['occurences']==12)?'selected':'' ?> >12</option>
+                                                        <option <?php echo ($_row2['occurences']==13)?'selected':'' ?> >13</option>
+                                                        <option <?php echo ($_row2['occurences']==14)?'selected':'' ?> >14</option>
+                                                        <option <?php echo ($_row2['occurences']==15)?'selected':'' ?> >15</option>
+                                                        <option <?php echo ($_row2['occurences']==16)?'selected':'' ?> >16</option>
+                                                    </select>
+                                                </td>
+                                                <td class="border_needed" style="text-align:center;">
+                                                    <select name="amount" style="height:25px;"> 
+                                                        <option>--</option>
+                                                        <option <?php echo ($_row2['amount']==400)?'selected':'' ?> >400</option>
+                                                        <option <?php echo ($_row2['amount']==800)?'selected':'' ?> >800</option>
+                                                        <!--<option <?php echo ($_row2['amount']==3000)?'selected':'' ?> >3000</option>-->
+                                                    </select>
+                                                </td>
+                                                <td class="border_needed" style="text-align:center;">                                                
+                                                    <input type="hidden" name="hidden_trans_id" value="<?php echo ($stmt2->rowCount()>=1)?$_row2['trans_id']:'';?>">
+                                                    <input type="hidden" name="hidden_member_no" value="<?php echo $_row['member_no']?>">
+                                                    <input style="color:white;background-color:red! important;"   type="submit" name="deleteDefault" value="D" <?php echo ($stmt2->rowCount()>=1)?'':'disabled';?> />
+                                                    <input style="color:white;background-color:orange! important;"type="submit" name="updateDefault" value="U" <?php echo ($stmt2->rowCount()>=1)?'':'disabled';?> />
+                                                    <input style="color:white;background-color:green! important;" type="submit" name="createDefault" value="C" <?php echo ($stmt2->rowCount()>=1)?'':'';?> />
+                                                </td>
+                                            </form>
+                                        </tr>
+                                 <?php    
+                                    } 
+                                    } 
+                                }
+                                else{
+                                    $_row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                                if(isset($_POST['showAll']) or !isset($_POST['view']) or (isset($_POST['view']) && ($_POST['view']=='active' && $stmt2->rowCount()>0)) or (isset($_POST['view']) && ($_POST['view']=='inactive' && $stmt2->rowCount()>=0))){
+                                    ?>
+                                                <tr>
+                                                    <form action="/mystatsdir/manageDefaults/" method="POST" >
+                                                        <td class="border_needed">  
+                                                            <input type="hidden" name="husername" value="<?php echo $_row['username']; ?>" />                                                
+                                                            <input style="padding:3px;height:30px;font-size:14px;background-color:transparent;"type="text" name="username" value="<?php echo $_row['username']; ?>" />
+                                                            <input style="color:white;background-color:green! important;"   type="submit" name="updateUsername" value="UPD"  />
+                                                        </td>
+                                                        <td class="border_needed">
+                                                            <?php echo $_row['firstname'].' '.$_row['lastname'];?>
+                                                        </td>
+                                                        <td class="border_needed" style="text-align:center;">
+                                                            <?php echo ($stmt2->rowCount()>=1)?'Yes':'No' ?>                                                
+                                                        </td>
+                                                        <td class="border_needed" style="text-align:center;">
+                                                            
+                                                         </td>
+                                                        <td class="border_needed" style="text-align:center;">
+                                                            <select name="occurence" style="height:25px;"> 
+                                                                <option <?php echo ($_row2['occurences']==0)?'selected':'' ?> >0</option>
+                                                                <option <?php echo ($_row2['occurences']==1)?'selected':'' ?> >1</option>
+                                                                <option <?php echo ($_row2['occurences']==2)?'selected':'' ?> >2</option>
+                                                                <option <?php echo ($_row2['occurences']==3)?'selected':'' ?> >3</option>
+                                                                <option <?php echo ($_row2['occurences']==4)?'selected':'' ?> >4</option>
+                                                                <option <?php echo ($_row2['occurences']==5)?'selected':'' ?> >5</option>
+                                                                <option <?php echo ($_row2['occurences']==6)?'selected':'' ?> >6</option>
+                                                                <option <?php echo ($_row2['occurences']==7)?'selected':'' ?> >7</option>
+                                                                <option <?php echo ($_row2['occurences']==8)?'selected':'' ?> >8</option>
+                                                                <option <?php echo ($_row2['occurences']==9)?'selected':'' ?> >9</option>
+                                                                <option <?php echo ($_row2['occurences']==10)?'selected':'' ?> >10</option>
+                                                                <option <?php echo ($_row2['occurences']==11)?'selected':'' ?> >11</option>
+                                                                <option <?php echo ($_row2['occurences']==12)?'selected':'' ?> >12</option>
+                                                                <option <?php echo ($_row2['occurences']==13)?'selected':'' ?> >13</option>
+                                                                <option <?php echo ($_row2['occurences']==14)?'selected':'' ?> >14</option>
+                                                                <option <?php echo ($_row2['occurences']==15)?'selected':'' ?> >15</option>
+                                                                <option <?php echo ($_row2['occurences']==16)?'selected':'' ?> >16</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="border_needed" style="text-align:center;">
+                                                            <select name="amount" style="height:25px;"> 
+                                                                <option>--</option>
+                                                                <option <?php echo ($_row2['amount']==400)?'selected':'' ?> >400</option>
+                                                                <option <?php echo ($_row2['amount']==800)?'selected':'' ?> >800</option>
+                                                                <!--<option <?php echo ($_row2['amount']==3000)?'selected':'' ?> >3000</option>-->
+                                                            </select>
+                                                        </td>
+                                                        <td class="border_needed" style="text-align:center;">                                                
+                                                            <input type="hidden" name="hidden_trans_id" value="<?php echo ($stmt2->rowCount()==1)?$_row2['trans_id']:'';?>">
+                                                            <input type="hidden" name="hidden_member_no" value="<?php echo $_row['member_no']?>">
+                                                            <input style="color:white;background-color:red! important;"   type="submit" name="deleteDefault" value="D" <?php echo ($stmt2->rowCount()>=1)?'':'disabled';?> />
+                                                            <input style="color:white;background-color:orange! important;"type="submit" name="updateDefault" value="U" <?php echo ($stmt2->rowCount()>=1)?'':'disabled';?> />
+                                                            <input style="color:white;background-color:green! important;" type="submit" name="createDefault" value="C" <?php echo ($stmt2->rowCount()>=1)?'':'';?> />
+                                                        </td>
+                                                    </form>
+                                                </tr>
+                                    <?php    
+                                    } 
+                            }
+                            } 
+                        }else{
+
+                            $def = new defaultsClass();
+                            $stmt2 = $def->getAllActiveDefaults();
+
+                            while($_row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
+
+                                $members = new memberClass();
+                                    
+                                //if(isset($_POST['showAll']) or !isset($_POST['view']) or (isset($_POST['view']) && ($_POST['view']=='active' && $stmt2->rowCount()>0)) or (isset($_POST['view']) && ($_POST['view']=='inactive' && $stmt2->rowCount()>=0))){
+                            ?>
+                                    <tr>
+                                        <form action="/mystatsdir/manageDefaults/" method="POST" >
+                                            <td class="border_needed">  
+                                                <input type="hidden" name="husername" value="<?php echo $members->getUsername($_row2['member_no']); ?>" />                                                
+                                                <input style="padding:3px;height:30px;font-size:14px;background-color:transparent;"type="text" name="username" value="<?php echo $members->getUsername($_row2['member_no']); ?>" />
+                                                <input style="color:white;background-color:green! important;"   type="submit" name="updateUsername" value="UPD"  />
+                                            </td>
+                                            <td class="border_needed">
+                                                <?php echo $members->getFullname($_row2['member_no']);?>
+                                            </td>
+                                            <td class="border_needed" style="text-align:center;">
+                                                <?php echo 'Yes'; ?>                                                
+                                            </td>
+                                            <td class="border_needed" style="text-align:center;<?php echo ($def->getCurrentDefault_2($_row2['amount'])==$_row2['trans_id'])?'background-color:#9de863! important;':'background-color:#e8cb63! important;'?>">
+                                                <?php echo ($def->getCurrentDefault_2($_row2['amount'])==$_row2['trans_id'])?'Yes':''?>
+                                            </td>
+                                            <td class="border_needed" style="text-align:center;">
+                                                <select name="occurence" style="height:25px;"> 
+                                                    <option <?php echo ($_row2['occurences']==0)?'selected':'' ?> >0</option>
+                                                    <option <?php echo ($_row2['occurences']==1)?'selected':'' ?> >1</option>
+                                                    <option <?php echo ($_row2['occurences']==2)?'selected':'' ?> >2</option>
+                                                    <option <?php echo ($_row2['occurences']==3)?'selected':'' ?> >3</option>
+                                                    <option <?php echo ($_row2['occurences']==4)?'selected':'' ?> >4</option>
+                                                    <option <?php echo ($_row2['occurences']==5)?'selected':'' ?> >5</option>
+                                                    <option <?php echo ($_row2['occurences']==6)?'selected':'' ?> >6</option>
+                                                    <option <?php echo ($_row2['occurences']==7)?'selected':'' ?> >7</option>
+                                                    <option <?php echo ($_row2['occurences']==8)?'selected':'' ?> >8</option>
+                                                    <option <?php echo ($_row2['occurences']==9)?'selected':'' ?> >9</option>
+                                                    <option <?php echo ($_row2['occurences']==10)?'selected':'' ?> >10</option>
+                                                    <option <?php echo ($_row2['occurences']==11)?'selected':'' ?> >11</option>
+                                                    <option <?php echo ($_row2['occurences']==12)?'selected':'' ?> >12</option>
+                                                    <option <?php echo ($_row2['occurences']==13)?'selected':'' ?> >13</option>
+                                                    <option <?php echo ($_row2['occurences']==14)?'selected':'' ?> >14</option>
+                                                    <option <?php echo ($_row2['occurences']==15)?'selected':'' ?> >15</option>
+                                                    <option <?php echo ($_row2['occurences']==16)?'selected':'' ?> >16</option>
+                                                </select>
+                                            </td>
+                                            <td class="border_needed" style="text-align:center;">
+                                                <select name="amount" style="height:25px;"> 
+                                                    <option>--</option>
+                                                    <option <?php echo ($_row2['amount']==400)?'selected':'' ?> >400</option>
+                                                    <option <?php echo ($_row2['amount']==800)?'selected':'' ?> >800</option>
+                                                    <!--<option <?php echo ($_row2['amount']==3000)?'selected':'' ?> >3000</option>-->
+                                                </select>
+                                            </td>
+                                            <td class="border_needed" style="text-align:center;">                                                
+                                                <input type="hidden" name="hidden_trans_id" value="<?php echo $_row2['trans_id'];?>">
+                                                <input type="hidden" name="hidden_member_no" value="<?php echo $_row['member_no']?>">
+                                                <input style="color:white;background-color:red! important;"   type="submit" name="deleteDefault" value="D"  />
+                                                <input style="color:white;background-color:orange! important;"type="submit" name="updateDefault" value="U"  />
+                                                <input style="color:white;background-color:green! important;" type="submit" name="createDefault" value="C" disabled />
+                                            </td>
+                                        </form>
+                                    </tr>
+                             <?php    
+                               // } 
+                                } 
+                        }  
+                        ?>
+                    </table>
+                    <!--End payment-->                                                                        
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

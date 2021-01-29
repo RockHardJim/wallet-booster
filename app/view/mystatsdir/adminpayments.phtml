@@ -1,0 +1,176 @@
+<?php
+
+    $_m = new memberClass();
+    $_a = new allocationsClass();
+    if(isset($_POST['searchByDate']))
+        $_res = $_a->getAllAllocationsByDate($_POST['sDate']);  
+    elseif(!isset($_POST['searchButton']) or (isset($_POST['searchButton']) && $_POST['search']=='') or (isset($_POST['searchButton']) && strlen($_POST['search'])<3))
+        $_res = $_a->getAllAllocations();        
+    else
+        $_res = $_a->getSpecificAllocations($_POST['search']);
+    
+
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+    $_d = new defaultsClass();
+
+?>
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading">Admin Menu</div>
+                <ul>
+                    <li><a href="/mystatsdir/admin">My Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admindefaults">Defaults</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminmembers">Members</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminpayments">Payments</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/sendBulkEmail">Send bulk email</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminnotifications">News updates</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admintestimonials">Testimonials</a></li>
+                </ul>
+                <div class="dleft_heading"> </div>
+                <ul>    
+                    <li><a href="/auth/logout/"><h style="color:red; font-weight:600;">Sign Out</h></a></li>
+                    <hr />      
+                </ul>
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading">Payments</div>
+                <div class="body" style="overflow:auto;">
+                    <div id="error_message">
+
+                        <?php
+				        	if(!empty($this->getMessage())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+				        		echo '';
+				        ?>
+				        		<div class="alert <?php echo $this->getMessageType(); ?>" role="alert">									
+  				        			<?php  echo $this->getMessage(); ?>
+				        		</div>
+				        <?php
+				        	}	
+				        ?>
+                    </div>                                       
+                    <!--Start payment-->  
+                    <form action="" method="POST" style="margin-top:0px! important;"> 
+                            <input style="width:200px;height:36px;padding:5px;margin-bottom:10px"type="text" name="search" placeholder="Seach by name or username" />
+                            <input class="btn btn-info btn-sm" type="submit" name="searchButton" value="Search"/>
+                            <input class="btn btn-primary btn-sm" type="submit" name="Show All" value="Show All"/>
+                            <br />
+                    </form>
+                    <form action="" method="POST" style="margin-top:0px! important;"> 
+                            <input style="width:200px;border:1px solid #cecaca; margin-top:3px;padding:5px! important;" name="sDate" id="sDate" value="<?php echo (isset($_POST['sDate']))?$_POST['sDate']:date('Y-m-d') ?>" type="date" required />
+                            <input style="margin-top:-3px;"class="btn btn-success btn-sm" type="submit" name="searchByDate" value="Search by Date"/>
+                            <br />
+                    </form>
+                    <div style="margin:5px;margin-left:0px;overflow:auto;height:400px;">                  
+                        <table style="width:100%! important;padding-right:5px;">
+                            <tr>
+                                <th class="border_needed">
+                                    Payer
+                                </th>
+                                <th class="border_needed">
+                                    Receiver
+                                </th>
+                                <th class="border_needed">
+                                    Amount
+                                </th>
+                                <th class="border_needed">
+                                    Status
+                                </th>
+                                <th class="border_needed">
+                                    Allocated On
+                                </th>
+                                <th class="border_needed">
+                                    Approved On
+                                </th>
+                                <th class="border_needed">
+                                    Reverse
+                                </th>
+                                <th class="border_needed">
+                                    Approve
+                                </th>
+                            </tr>
+                            
+                            <?php
+                                $_counter = 0;
+                                while($_row = $_res->fetch(PDO::FETCH_ASSOC)){
+                                    
+                                    $_counter += 1;
+                                    $_payer = $_row['payer'];
+                                    $_receiver = $_row['receiver'];
+
+                                    //if(!isset($_POST['searchByDate']) or (isset($_POST['searchByDate']) && isset($_POST['sDate']) && $new_date == $trans_date)){
+                            ?>
+
+                                    <tr>
+                                        <td class="border_needed" style="color:blue;font-weight:600;">
+                                            <?php echo $_m->getUsername($_payer); ?>
+                                        </td>
+                                        <td class="border_needed" style="color:#800000;font-weight:600;">
+                                            <?php echo $_m->getUsername($_receiver); ?>
+                                        </td>
+                                        <td class="border_needed">
+                                            <?php echo 'R'.$_row['amount']; ?>
+                                        </td>
+                                        <td class="border_needed" style="text-align:center;font-weight:600;color:blue;">
+                                            <?php echo $_row['status']; ?>
+                                        </td>
+                                        <td class="border_needed" style="text-align:center;color:#800000;font-weight:600;">
+                                            <?php echo $_row['trans_date']; ?>  
+                                        </td>
+                                        <td class="border_needed" style="text-align:center;color:#800000;font-weight:600;">
+                                            <?php echo $_row['timestamp']; ?>  
+                                        </td>
+                                        <td class="border_needed" style="text-align:center;">
+                                            <form action="" method="">
+                                                <input type="hidden" id="<?php echo 'hidden_trans_no'.$_counter;?>" name="<?php echo 'hidden_trans_no'.$_counter;?>" value="<?php echo $_row['trans_id'];?>" />
+                                                <input 
+                                                    class="btn btn-danger btn-sm" 
+                                                    type="button" 
+                                                    onclick = "return confirm('Are you sure you want to reverse?') ? reversePayment(<?php echo $_counter; ?>):''"
+                                                    name="Paid" 
+                                                    value="Reverse Payment" 
+                                                    id="<?php echo 'Paid'.$_counter;?>" 
+                                                    <?php echo ($_row['status']=='Paid' or $_row['status']=='Deleted' or $_row['status']=='Reversed')?'disabled':''; ?> 
+                                                />
+                                            </form>
+                                        </td> 
+                                        <td class="border_needed" style="text-align:center;">
+                                            <form action="" method="">
+                                                <input type="hidden" id="<?php echo 'hidden_trans_no'.$_counter;?>" name="<?php echo 'hidden_trans_no'.$_counter;?>" value="<?php echo $_row['trans_id'];?>" />
+                                                <input 
+                                                    class="btn btn-info btn-sm" 
+                                                    type="button" 
+                                                    onclick = "return confirm('Are you sure?') ? confirmPayment(<?php echo $_counter; ?>):''"
+                                                    name="Paid" 
+                                                    value="Approve Payment" 
+                                                    id="<?php echo 'Paid'.$_counter;?>" 
+                                                    <?php echo ($_row['status']=='Paid' or $_row['status']=='Deleted' or $_row['status']=='Reversed')?'disabled':''; ?> 
+                                                />
+                                            </form>
+                                        </td>                                                
+                                    </tr>
+
+                            <?php
+                                    //}
+                                }                      
+                            ?>
+                        </table>
+                    </div>
+                    <!--End payment-->                                                                        
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

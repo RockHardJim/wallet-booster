@@ -1,0 +1,275 @@
+<?php
+
+    $_m = new memberClass();
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+    $_o = new overridesClass();
+
+?>
+
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading">Admin Menu</div>
+                <ul>
+                    <li><a href="/mystatsdir/admin">My Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admindefaults">Defaults</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminmembers">Members</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminpayments">Payments</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/sendBulkEmail">Send bulk email</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminnotifications">News updates</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admintestimonials">Testimonials</a></li>
+                </ul>
+                <div class="dleft_heading"> </div>
+                <ul>    
+                    <li><a href="/auth/logout/"><h style="color:red; font-weight:600;">Sign Out</h></a></li>
+                    <hr />      
+                </ul>
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading">Dashbboard</div>
+                <div class="body">
+                    <strong>Membership</strong>
+                    <div id="error_message">
+
+                        <?php
+				        	if(!empty($this->getMessage())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+				        		echo '';
+				        ?>
+				        		<div class="alert <?php echo $this->getMessageType(); ?>" role="alert">									
+  				        			<?php  echo $this->getMessage(); ?>
+				        		</div>
+				        <?php
+				        	}	
+				        ?>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 brequired">
+                            <div style="padding-bottom:15px; margin-bottom: 10px; border-radius:10px; text-align:center;">
+                            <strong>Global stats</strong><br /><br />
+                               <table>
+                                    <tr>
+                                        <th>
+                                            Description
+                                        </th>
+                                        <th>
+                                            Values
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Total Registered
+                                        </td>
+                                        <td>
+                                            <?php echo $_m->countAllMembers();?> member(s)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Total Active
+                                        </td>
+                                        <td>
+                                            <?php echo $_m->countAllMembersActive();?> member(s)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Total Inactive
+                                        </td>
+                                        <td>
+                                            <?php echo $_m->countAllMembersInActive();?> member(s)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Total Circulating
+                                        </td>
+                                        <td>
+                                            <?php echo 'R'.$_a->moneyCirculated();?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Paid to defaults
+                                        </td>
+                                        <td>
+                                            <?php echo 'R'.$_a->paid2Defaults();?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Pending to defaults
+                                        </td>
+                                        <td>
+                                            <?php echo 'R'.$_a->pending2Defaults();?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Manipulated Membership
+                                        </td>
+                                        <td>
+                                            <?php echo $_m->countAllMembersActive()+$_m->getMembership(); ?>
+                                        </td>
+                                    </tr>
+                               </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div style="padding-bottom:15px; margin-bottom: 10px; border-radius:10px; text-align:center;"> 
+                                <strong>Manipulate membership</strong> 
+                                <form action="/mystatsdir/Manipulate" method="POST" style="width:90%; margin:0 auto;">
+                                    <div class="form-group" style="margin-bottom:0px;margin-top:0px;"> 
+                                        <input class="form-control form-rounded" type="text" name="manipulateValue" placeholder="Add value to active members" />
+                                        <input  class="form-control form-rounded btn btn-primary btn-sm" type="submit" name="Manipulate" value="Manipulate" />
+                                    </div>
+                                </form> 
+                                <hr>
+                                <strong>Override Member</strong> 
+                                <form action="/mystatsdir/Override" method="POST" style="width:90%; margin:0 auto;">
+                                    <div class="form-group" style="margin-bottom:0px;margin-top:0px;"> 
+                                        <input class="form-control form-rounded" type="text" name="overrideValue" placeholder="Add Username to override for upgrades" />
+                                        <input  class="form-control form-rounded btn btn-primary btn-sm" type="submit" name="Override" value="Override" />
+                                    </div>
+                                </form>      
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-md-6 brequired">
+                            <div style="padding-bottom:0px; margin-bottom:0px; border-radius:10px; text-align:center;overflow:auto;">  
+                                <strong>Add Default Sponsor</strong>
+                                <form action="/mystatsdir/addDefaultSponsor" method="POST" style="width:90%; margin:0 auto;">
+                                    <div class="form-group" style="margin-bottom:0px;margin-top:0px;"> 
+                                        <input class="form-control form-rounded" type="text" name="sponsorValue" placeholder="Add Username to use as default sponsor" />
+                                        <input  class="form-control form-rounded btn btn-primary btn-sm" type="submit" name="createDefaultSponsor" value="Create Sponsor" />
+                                    </div>
+                                </form>   
+                            </div>
+                        </div>
+                        <div class="col-md-6 brequired">
+                            <div style="padding-bottom:0px; margin-bottom:0px; border-radius:10px; text-align:center;overflow:auto;">  
+                                <strong>Default Sponsors</strong>
+                                <br /><br />
+                                <table style="width:100%">
+                                    <tr>
+                                        <th>
+                                            Id
+                                        </th>
+                                        <th>
+                                            Username
+                                        </th>
+                                        <th>
+                                            Remove
+                                        </th>
+                                    </tr>
+                                    <?php
+                                        $_members = new memberClass();
+                                        $_sponsors = $_members->getAllDefaultSponsors();
+                                        $_id = 0;
+                                        foreach ($_sponsors as $_row){
+                                            $_id += 1;
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo $_id;?>
+                                            </td>
+                                            <td>
+                                                <?php echo $_members->getUsername($_row['member_no']); ?>
+                                            </td>
+                                            <td>
+                                                <form action="/mystatsdir/deleteSponsor" method="POST">
+                                                    <input type="hidden" name="h_member_no" value="<?php echo $_row['member_no']; ?>">
+                                                    <input type="submit" class="btn btn-danger btn-md" value="Delete" name="deleteSponsor" style="background-color:red! important;height:auto;color:white! important;" />
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php        
+                                        }
+                                    ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 brequired">
+                            <div style="padding-bottom:0px; margin-bottom:0px; border-radius:10px; text-align:center;overflow:auto;">  
+                            <strong>Overrides List</strong>
+                            <table style="width:100%">
+                                <tr>
+                                    <th>
+                                        Username
+                                    </th>
+                                    <th>
+                                        Fullnames
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Timestamp
+                                    </th>
+                                    <th>
+                                        Remove
+                                    </th>
+                                </tr>
+                                <?php
+
+                                    $_fetch = $_o->getAllOverrides();
+
+                                    foreach($_fetch as $_row){
+                                ?>
+
+                                        <tr>
+                                            <td>
+                                                <?php echo $_m->getUsername($_row['member_no'])?>
+                                            </td>
+                                            <td>
+                                                <?php echo $_m->getFullname($_row['member_no'])?>
+                                            </td>
+                                            <td>
+                                                Overriden
+                                            </td>
+                                            <td>
+                                                <?php echo $_row['timestamp']?>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <form action="/mystatsdir/deleteOverride" method="POST">
+                                                    <input type="hidden" name="hidden_trans_id" value="<?php echo $_row['trans_id']?>" />
+                                                    <input type="submit" name="deleteOverride" value="Delete" />
+                                                </form>
+                                            </td>
+                                        </tr>
+
+                                <?php
+                                    }
+
+                                ?>
+                            </table> 
+                            </div>
+                        </div>
+                    </div>                
+                    <br />
+                    <hr />
+                    <br />
+                    <!--Start payment--> 
+
+                    <!--End payment-->
+                    </div>                                                       
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,199 @@
+<?php
+
+    $_memberclass = new memberClass();
+    $_treeclass   = new treeClass();
+    $_allclass    = new allocationsClass();
+    $_a            = new allocationsClass();
+    $_i            = new incentivesClass();
+
+?>
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading" >My menu</div>
+                <ul>
+                    <li><a href="/mystatsdir/index">Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/profile">Member Profile</a></li>
+                    <hr />
+                    <!--<hr />
+                    <li><a href="/mystatsdir/Notifications">News update</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/Events">Upcoming events</a></li>-->                
+                    <li><a href="/mystatsdir/In">Payments Received</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/Out">Payments Sent</a></li>  
+                    <hr />              
+                    <li><a href="/mystatsdir/tree">Tree</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/teamList">All team members</a></li> 
+                    <hr />                                         
+                </ul>
+                <a href="/auth/logout/"><button class="btn btn-danger btn-sm btn-block">Sign Out</button></a>
+            </div>    
+            
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading"> Downliners list </div>
+                <hr />
+                <div class="body">
+                    <h6 style="text-align:right;font-size:15px;padding"><img src="/images/login.png" style="height:20px;">I am <strong><?php echo $_SESSION['username'];?></strong></h6>
+                    <?php
+                        $_obj = new treeClass();
+                        $_mem = new memberClass();
+                        $_my_tree = array(ME);
+                        $_my_tree = $_obj->populateTree($_my_tree);                        
+                    ?> 
+                    <div id="error_message">
+                    </div>
+                    <?php 
+                        if($_i->getUpgradeDue(ME)>0){
+                            $_row = $_i->getCurrentIncentive($_i->getUpgradeDue(ME))->fetch(PDO::FETCH_ASSOC);
+                            $_counter = 1;
+                    ?>
+                            <div style="background-color:#f9f9f9; padding:20px;border:1px solid green; border-radius:12px; margin:30px auto;">
+                                
+                                <h6 style="font-weight:bold;"><img src="/images/upgrade_icon.png" style="height:25px;margin-top:-10px;">&nbsp;Upgrade Alert</h6>
+                                <p style="margin-top:10px; font-weight:bold;font-size:17px;important;color:brown;">NOTE: You are due to upgrade to the next level
+
+                                    <!--<?php   
+                                            /*if(!$_a->sponsorhasUpgraded($_row['trans_id'])==''){
+                                                echo '<div style="border:1px solid red;padding:15px;margin-bottom:5px;">';
+                                                    echo '<h style="font-weight:400;color:red;">NB:'.$_a->sponsorhasUpgraded($_row['trans_id']).'</h>';
+                                                echo '</div>';
+                                            }*/                                                                                    
+                                    ?>-->
+                                    <form action="" method="" style="margin-left:10px;margin-top:10px! important;width:100%;text-align:center;">
+                                        <input type="hidden" id="<?php echo 'hidden_trans_no'.$_counter;?>" name="<?php echo 'hidden_trans_no'.$_counter;?>" value="<?php echo $_row['trans_id'];?>" />
+                                        <input style="margin-top:-5px;"
+                                            class="btn btn-secondary btn-md float-left" 
+                                            type="button" 
+                                            onclick = "return confirm('Are you sure?') ? upgradeFunction(<?php echo $_counter; ?>):''"
+                                            name="Upgrade" 
+                                            value=" I want to upgrade >>" 
+                                            id="<?php echo 'Upgrade'.$_counter;?>" 
+                                        />
+                                    </form>
+                                    <div style="clear:both;">
+                                    </div>
+                                </p>
+                            </div>
+                    <?php                        
+                        }                          
+                    ?>
+                    <!--Start pasting here-->
+                    <form action="" method="POST" style="margin-top:0px! important;"> 
+                            <input style="width:100%;height:40px;padding:5px;margin-bottom:10px"type="text" name="search" placeholder="Seach either by name, surname, username, email, cellphone" />
+                            <input class="btn btn-warning btn-sm" type="submit" name="searchButton" value="Search"/>
+                            <input class="btn btn-primary btn-sm" type="submit" name="Show All" value="Show All"/>
+                            <br /><br />
+                    </form>
+					<div class="row">
+                        <div class="col-md-12" style="height:400px;">
+                            <table style="width:100%! important;">
+                                <tr>
+                                    <th class="border_needed">
+                                        Row id
+                                    </th>
+                                    <th class="border_needed">
+                                        Username
+                                    </th>
+                                    <th class="border_needed">
+                                        Name
+                                    </th>
+                                    <th class="border_needed">
+                                        Status
+                                    </th>
+                                    <th class="border_needed">
+                                        Level
+                                    </th>
+                                    <th class="border_needed">
+                                        Upgrade Due
+                                    </th>
+                                    <th class="border_needed">
+                                        Cellphone
+                                    </th>
+                                    <th class="border_needed">
+                                        No of downliners
+                                    </th>
+                                </tr>
+                                <?php
+                                    $_counter=0;
+                                    $_bol = true;
+                                    $_arr = array();
+                                    while($_counter<11 && $_bol){
+                                        foreach($_my_tree as $_tree){ 
+                                            if(array_sum($_my_tree) == 0) {
+                                                $_bol = false;
+                                                break;
+                                            } else {
+                                                $_bol = true;
+                                                array_push($_arr, $_tree); 
+                                            } 
+                                                                                                                             
+                                        }
+                                        $_my_tree = $_obj->populateTree($_my_tree);
+                                        $_counter+=1;
+                                       
+                                    }
+                                    
+                                    //echo sizeof($_arr);
+                                    $_row_number = 0;
+                                    foreach($_arr as $_tree){
+                                        $_row_number += 1;
+                                        if($_tree>0){
+                                            if(!isset($_POST['searchButton']) or (isset($_POST['searchButton']) && preg_match("/{$_POST['search']}/i", $_mem->getUsername($_tree)))){
+
+                                ?>
+                                            <tr>
+                                                <td class="border_needed">
+                                                    <?php echo $_row_number; ?>
+                                                </td>
+                                                <td class="border_needed" style="color:blue;font-weight:600;">                                                
+                                                    <form action="/mystatsdir/viewDlTree/" method="POST">
+                                                        <input type="hidden" name="hidden_member_no" value="<?php echo $_tree?>" />
+                                                        <input type="submit" style="padding:3px;"class="btn btn-block btn-sm" name="viewDlTree" value="<?php echo $_mem->getUsername($_tree); ?>">
+                                                    </form>
+                                                </td>
+                                                <td class="border_needed">
+                                                    <?php echo $_mem->getFullname($_tree); ?>
+                                                </td>
+                                                <td class="border_needed">
+                                                    <?php echo $_mem->isActive($_tree); ?>
+                                                </td>
+                                                <td class="border_needed" style="text-align:center;color:#800000;font-weight:600;">
+                                                    <?php echo $_allclass->getStageCompleted($_tree); ?>
+                                                </td>
+                                                <?php
+                                                    if($_i->getUpgradeDue($_tree)==0)
+                                                        $_upgrade = 'No';
+                                                    else
+                                                        $_upgrade = 'Yes';
+                                                ?>
+                                                <td class="border_needed" style="text-align:center;font-weight:600;color:blue;">
+                                                    <?php echo $_upgrade; ?>
+                                                </td>
+                                                <td class="border_needed">
+                                                    <?php echo $_mem->getMobile($_tree); ?>
+                                                </td>
+                                                <td class="border_needed" style="text-align:center;font-weight:600;color:purple;">
+                                                    <?php echo $_treeclass->noOfDownliners($_tree); ?>
+                                                </td>                                                
+                                            </tr>
+                                <?php
+                                            }
+                                        }
+                                    }
+                                ?>
+                            </table>
+                        </div>
+                    </div>
+                    <!--End pasting here -->
+                    
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

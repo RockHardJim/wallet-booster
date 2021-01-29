@@ -1,0 +1,213 @@
+<?php
+
+    $_m = new memberClass();
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+
+?>
+<?php
+
+$_m = new memberClass();
+$_a = new allocationsClass();
+$_t = new treeClass();
+$_i = new incentivesClass();
+$_b = new bankClass();
+
+?>
+<div class="container dash">	
+<div class="row">	
+	<div class="col-md-3" id="navmenu">
+		<div class="dleft">
+			<div class="dleft_heading" >My menu</div>
+			<ul>
+				<li><a href="/mystatsdir/index">Dashboard</a></li>
+				<hr />
+				<li><a href="/mystatsdir/profile">Member Profile</a></li>
+				<hr />
+				<!--<hr />
+				<li><a href="/mystatsdir/Notifications">News update</a></li>
+				<hr />
+				<li><a href="/mystatsdir/Events">Upcoming events</a></li>-->                
+				<li><a href="/mystatsdir/In">Payments Received</a></li>
+				<hr />
+				<li><a href="/mystatsdir/Out">Payments Sent</a></li>  
+				<hr />              
+				<li><a href="/mystatsdir/tree">Tree</a></li>
+				<hr />
+				<li><a href="/mystatsdir/teamList">All team members</a></li> 
+				<hr />                                         
+			</ul>
+			<a href="/auth/logout/"><button class="btn btn-danger btn-sm btn-block">Sign Out</button></a>
+		</div>    
+		
+	</div>
+	<div class="col-md-9">
+		<div class="dright">
+			<div class="dright_heading"> Member profile </div>
+			<hr />
+			<div class="body">
+				<h6 style="text-align:right;font-size:15px;padding"><img src="/images/login.png" style="height:20px;">I am <strong><?php echo $_SESSION['username'];?></strong></h6>
+					<div id="error_message">
+						<?php
+							
+				        	if(!empty($this->getMessage())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+				        		echo '';
+				        ?>
+				        		<div class="alert <?php echo $this->getMessageType(); ?>" role="alert">									
+  				        			<?php  echo $this->getMessage(); ?>
+				        		</div>
+				        <?php
+							}
+							
+						?>
+					</div>
+					<?php 
+                        if($_i->getUpgradeDue(ME)>0){
+                            $_row = $_i->getCurrentIncentive($_i->getUpgradeDue(ME))->fetch(PDO::FETCH_ASSOC);
+                            $_counter = 1;
+                    ?>
+                            <div style="background-color:#f9f9f9; padding:20px;border:1px solid green; border-radius:12px; margin:30px auto;">
+                                
+                                <h6 style="font-weight:bold;"><img src="/images/upgrade_icon.png" style="height:25px;margin-top:-10px;">&nbsp;Upgrade Alert</h6>
+                                <p style="margin-top:10px; font-weight:bold;font-size:17px;important;color:brown;">NOTE: You are due to upgrade to the next level
+
+                                    <!--<?php   
+                                            /*if(!$_a->sponsorhasUpgraded($_row['trans_id'])==''){
+                                                echo '<div style="border:1px solid red;padding:15px;margin-bottom:5px;">';
+                                                    echo '<h style="font-weight:400;color:red;">NB:'.$_a->sponsorhasUpgraded($_row['trans_id']).'</h>';
+                                                echo '</div>';
+                                            }*/                                                                                    
+                                    ?>-->
+                                    <form action="" method="" style="margin-left:10px;margin-top:10px! important;width:100%;text-align:center;">
+                                        <input type="hidden" id="<?php echo 'hidden_trans_no'.$_counter;?>" name="<?php echo 'hidden_trans_no'.$_counter;?>" value="<?php echo $_row['trans_id'];?>" />
+                                        <input style="margin-top:-5px;"
+                                            class="btn btn-secondary btn-md float-left" 
+                                            type="button" 
+                                            onclick = "return confirm('Are you sure?') ? upgradeFunction(<?php echo $_counter; ?>):''"
+                                            name="Upgrade" 
+                                            value=" I want to upgrade >>" 
+                                            id="<?php echo 'Upgrade'.$_counter;?>" 
+                                        />
+                                    </form>
+                                    <div style="clear:both;">
+                                    </div>
+                                </p>
+                            </div>
+                    <?php                        
+                        }                          
+                    ?>
+					<!--Start pasting here-->
+					<div class="row">
+				        <?php
+				            $_obj = new memberClass();
+				            $stmt = $_obj->getMemberDetails(ME);
+				            $_row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+				            $_obj = new bankClass();
+				            $stmt = $_obj->getBankingDetails(ME);
+				            $_row2 = $stmt->fetch(PDO::FETCH_ASSOC);
+				        ?>      	        
+								<div class="col-md-6" style="padding:0px; margin:0px;margin-bottom:15px;">
+									<strong>Personal Details</strong>
+				                    <form action="" method="post" autocomplete="off" novalidate >
+				                        <div class="form-group profile">      
+				        					<input class="form-control" placeholder="Firstname" name="Firstname" value="<?php echo $_row['firstname'];?>" id="Firstname" type="text" required />
+				        					<div id="firstname_tick">
+				        					</div>
+				        					<div id="error_name"></div>			  
+				          				</div>
+				        				<div class="form-group profile">      
+				          					<input class="form-control" placeholder="Surname" name="Lastname" value="<?php echo $_row['lastname'];?>"  id="Lastname" type="text" required />
+				        					<div id="lastname_tick">
+				        					</div>
+				        					<div id="error_lastname"></div>	
+				        				</div>
+				        				<!--<div class="form-group profile">      
+				          					<input class="form-control" name="EmailAddress2" value="<?php echo $_row['email'];?>"  id="EmailAddress2" type="text" required readonly/>
+				        					<div id="email_tick">
+				        					</div>  
+				        					<div id="error_email_2"></div>	
+				                        </div>-->
+				                        <div class="form-group profile">
+				        					<input class="form-control" placeholder="Cellphone number" name="MobileNumber"  value="<?php echo $_row['mobile'];?>"  id="MobileNumber" value="+27"  type="text" required />
+				        					<div id="mobile_tick">
+				        					</div>
+				        					<div id="error_mobilenumber"></div>	      					
+				                        </div>
+				                        <!--<h5>Login Information</h5>
+				        				<div class="form-group profile">      
+				        					<input class="form-control" name="Username_2" value="<?php echo $_row['username'];?>"  id="Username_2" type="text" required readonly />
+				        					<div id="username_tick">
+				        					</div> 
+				        					<div id="error_username_2"></div>
+				          				</div>-->
+				                        <div class="form-group profile">      
+				        					<input class="form-control" placeholder="Password" name="Password" value="<?php echo $_row['password'];?>"  id="Password" type="password" required />
+				        					<div id="password_tick">
+				        					</div> 
+				        					<div id="error_password_2"></div>	
+				        					<div id="pass" style="display:none;">
+				        						<div class="error_password" id="error_password">							
+				        						</div>
+
+				        						<div class="showpassword">
+				        							<img src="/images/showpassword.png" id="ShowPassword" />
+				        						</div>
+				        					</div>
+				        				</div>
+				        				<div class="form-group profile">      
+				        					  <input class="form-control" placeholder="Confirm Password" name="ConfirmPassword" value="<?php echo $_row['password'];?>"  id="ConfirmPassword" type="password" required />
+				        					  <div id="confirmpassword_tick">
+				        					</div> 
+				        					<div id="error_confirmpassword"></div>
+				                        </div>
+				                        <input class="btn btn-secondary btn-block" type="button" name="UpdateAccountDetails" value="save edits" id="UpdateAccountDetails" />
+									</form>
+								</div>
+								<div class="col-md-6" style="padding:0px; margin:0px;">
+									<strong>Account Details</strong>
+									<form action="/mystatsdir/updateBankingDetails/" method="post" autocomplete="off" novalidate >	
+				            		    <div class="form-group profile">      
+											<input class="form-control" placeholder="Account Holder" name="AccHolder" value="<?php echo $_row2['accholder'];?>"  id="AccHolder" type="text" required />
+											<div id="accholder_tick">
+											</div> 
+											<div id="error_accholder"></div>
+				  						</div>
+									  	<div class="form-group profile">      
+											<input class="form-control" placeholder="Banking Institution" name="Bank" value="<?php echo $_row2['bank'];?>"  id="Bank" type="text" required />
+											<div id="bank_tick">
+											</div> 
+											<div id="error_bank"></div>						
+										</div>
+										<div class="form-group profile">      
+											  <input class="form-control" placeholder="Account Number" name="AccNumber" value="<?php echo $_row2['accnumber'];?>"  id="AccNumber" type="text" required />
+											  <div id="accnumber_tick">
+											  </div> 	
+											  <div id="error_accnumber"></div>
+										</div>
+										<div class="form-group profile">      
+											  <input class="form-control" placeholder="Branch Code" name="branchCode" value="<?php echo $_row2['branch_code'];?>" id="branchCode" type="text" required />
+											  <div id="branchcode_tick">
+											  </div> 
+											  <div id="error_branchcode"></div>
+										</div>
+										<div class="form-group profile">      
+											  <input class="form-control" placeholder="Bitcoin wallet" name="wallet" value="<?php echo $_row2['wallet'];?>" id="wallet" type="text" required />
+											  <div id="wallet_tick">
+											  </div> 
+											  <div id="error_wallet"></div>
+										</div>
+			
+				            		    <input class="btn btn-secondary btn-block" type="submit" name="UpdateBankingDetailsNew" value="Save edits" id="UpdateBankingDetailsNew" />			
+									</form>	 
+								</div>    	
+            		</div> 
+					<!--End pasting here-->
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>
+

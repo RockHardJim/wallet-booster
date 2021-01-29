@@ -1,0 +1,9 @@
+public function list($_id='', $_name=''){
+
+    if(isset($_SESSION['member_no'])){
+        $this->view('mystatsdir'.DS.'list',['name' => $_name,'id' => $_id], 'Money In Crew - List');
+        $this->_view->render();
+    }else{
+        header('Location: /default/index/');
+    }
+}

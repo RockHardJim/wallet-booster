@@ -1,0 +1,207 @@
+<?php
+
+    $_m = new memberClass();
+    $_post = '';
+    
+    if(isset($_POST['search'])){
+        $_post = $_POST['search'];
+    }
+
+    if(!(isset($_POST['searchButton']) && $_post <> ''))
+        $_res = $_m->getAllMembers();        
+    else
+        $_res = $_m->getSpecificMembers($_POST['search']);
+    
+
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+    $_d = new defaultsClass();
+
+?>
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading">Admin Menu</div>
+                <ul>
+                    <li><a href="/mystatsdir/admin">My Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admindefaults">Defaults</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminmembers">Members</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminpayments">Payments</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/sendBulkEmail">Send bulk email</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminnotifications">News updates</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admintestimonials">Testimonials</a></li>
+                </ul>
+                <div class="dleft_heading"> </div>
+                <ul>    
+                    <li><a href="/auth/logout/"><h style="color:red; font-weight:600;">Sign Out</h></a></li>
+                    <hr />      
+                </ul>
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading">Members</div>
+                <div class="body" style="overflow:auto;">
+                    <div id="error_message">
+
+                        <?php
+				        	if(!empty($this->getMessage())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+				        		echo '';
+				        ?>
+				        		<div class="alert <?php echo $this->getMessageType(); ?>" role="alert">									
+  				        			<?php  echo $this->getMessage(); ?>
+				        		</div>
+				        <?php
+				        	}	
+				        ?>
+                    </div>                                       
+                    <!--Start payment-->  
+                    <form action="" method="POST" style="margin-top:0px! important;"> 
+                            <input style="width:100%;height:40px;padding:5px;margin-bottom:10px"type="text" name="search" placeholder="Seach either by name, surname, username, email, cellphone" />
+                            <input class="btn btn-warning btn-sm" type="submit" name="searchButton" value="Search"/>
+                            <input class="btn btn-primary btn-sm" type="submit" name="Show All" value="Show All"/>
+                            <br /><br />
+                    </form>
+                    <div style="margin:5px;overflow:auto;">                  
+                        <table style="width:100%! important;padding-right:5px;">
+                            <tr>
+                                <th class="border_needed">
+                                    Username
+                                </th>
+                                <th class="border_needed">
+                                    Password
+                                </th>
+                                <th class="border_needed">
+                                    Reset PWD
+                                </th>
+                                <th class="border_needed">
+                                    Name
+                                </th>
+                                <th class="border_needed">
+                                    Cellphone
+                                </th>
+                                <th class="border_needed">
+                                    Email
+                                </th>
+                                <th class="border_needed">
+                                    Status
+                                </th>
+                                <th class="border_needed">
+                                    Unblock
+                                </th>
+                                <th class="border_needed">
+                                    Level
+                                </th>
+                                <th class="border_needed">
+                                    Due
+                                </th>
+                                <th class="border_needed">
+                                    Dls
+                                </th>
+                            </tr>
+                            
+                            <?php
+                                $_counter = 0;
+                                $_dis = '';
+                                $_dis_2 = '';
+                                while($_row = $_res->fetch(PDO::FETCH_ASSOC)){
+                                    $_mem = $_row['member_no'];
+                            ?>
+
+                                    <tr>
+                                        <td class="border_needed" style="color:blue;font-weight:600;">
+                                            <?php echo $_m->getUsername($_mem); ?>
+                                        </td>
+                                        <td class="border_needed" style="color:blue;font-weight:600;">
+                                            <?php echo $_m->getPassword($_mem); ?>
+                                        </td>
+                                        <td class="border_needed" style="text-align:center">
+                                            <form action="/mystatsdir/resetPWD" method="POST">
+                                                <input type="hidden" name="hidden_member_no" value="<?php echo $_row['member_no']?>">
+                                                <input style="color:white;" type="submit" name="resetPWD" value="R"/>
+                                            </form>
+                                        </td>
+                                        <td class="border_needed">
+                                            <?php echo $_m->getFullname($_mem); ?>
+                                        </td>
+                                        <td class="border_needed">
+                                            <?php echo $_m->getMobile($_mem); ?>
+                                        </td>
+                                        <td class="border_needed" style="text-align:center;color:#800000;font-weight:600;">
+                                            <?php echo $_m->getEmail($_mem); ?>
+                                        </td>
+                                        <?php
+                                            if($_m->isActive($_mem)=='Active'){
+                                                $_status = 'Active';
+                                            }elseif($_m->isActive($_mem)=='Inactive'){
+                                                $_status = 'Not Active';
+                                            }else{
+                                                $_status = 'Blocked';
+                                            }
+                                        ?>
+                                        <td class="border_needed" style="text-align:center;font-weight:600;color:blue;">
+                                            <?php echo $_status; ?>
+                                        </td>
+                                        <td class="border_needed" style="text-align:center;font-weight:600;color:blue;">
+                                        <?php
+                                            if($_a->hasDeletedAllocation($_mem) && $_a->hasPaidRegFee($_mem)){
+                                                // Current date and time
+                                                $datetime = date("Y-m-d H:i:s");
+                                                // Convert datetime to Unix timestamp
+                                                $timestamp = strtotime($datetime);
+                                                // Subtract time from datetime
+                                                $time = $timestamp - (11.5 * 60 * 60);
+                                                // Date and time after subtraction
+                                                $datetime = date("Y-m-d H:i:s", $time);
+
+                                            ?>
+                                                <form action="" method="" style="margin-top:5px! important;width:100%;text-align:center;">
+                                                    <input style="margin-top:-5px;margin-left:8px;"
+                                                        class="btn btn-danger btn-sm float-left" 
+                                                        type="button" 
+                                                        onclick="return confirm('Are you sure?') ? unblockFunction('<?php echo $datetime;?>','<?php echo $_mem;?>'):''"
+                                                        name="unblockMe" 
+                                                        value="Unblock Member <?php echo $_mem;?>" 
+                                                    />
+                                                </form>
+                                            <?php
+                                                }
+                                            ?>
+                                        </td>
+                                        <td class="border_needed" style="text-align:center;color:#800000;font-weight:600;">
+                                            <?php echo $_a->getStageCompleted($_mem); ?>
+                                        </td>
+                                        <?php
+                                            if($_i->getUpgradeDue($_mem)==0)
+                                                $_upgrade = 'No';
+                                            else
+                                                $_upgrade = 'Yes';
+                                        ?>
+                                        <td class="border_needed" style="text-align:center;font-weight:600;color:blue;">
+                                            <?php echo $_upgrade; ?>
+                                        </td>
+                                        <td class="border_needed" style="text-align:center;font-weight:600;color:purple;">
+                                            <?php echo $_t->noOfDownliners($_mem); ?>
+                                        </td>                                                
+                                    </tr>
+
+                            <?php
+                                }                      
+                            ?>
+                        </table>
+                    </div>
+                    <!--End payment-->                                                                        
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

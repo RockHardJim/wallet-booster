@@ -1,0 +1,16 @@
+#RewriteEngine on
+#RewriteRule ^ https://www.gloriousdestiny.co.za [R=301,L,NE]
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-l
+#RewriteRule ^ index.php [QSA,L]
+
+RewriteEngine On
+
+
+#RewriteCond %{HTTPS} off
+#RewriteRule (.*) https://www.gloriousdestiny.co.za/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php/$0 [PT,L] 

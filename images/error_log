@@ -1,0 +1,472 @@
+[31-May-2019 12:03:30 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'branch_code' at row 1' in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php:54
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php(54): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(208): bankClass->addMember('6105', Array)
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php on line 54
+[31-May-2019 13:55:50 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'branch_code' at row 1' in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php:54
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php(54): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(208): bankClass->addMember('6329', Array)
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php on line 54
+[31-May-2019 14:11:00 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'branch_code' at row 1' in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php:54
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php(54): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(208): bankClass->addMember('6366', Array)
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php on line 54
+[01-Jun-2019 14:38:12 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'branch_code' at row 1' in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php:54
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php(54): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(208): bankClass->addMember('7050', Array)
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php on line 54
+[03-Jun-2019 09:31:26 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'branch_code' at row 1' in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php:54
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php(54): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(208): bankClass->addMember('8238', Array)
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php on line 54
+[03-Jun-2019 10:33:15 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'branch_code' at row 1' in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php:54
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php(54): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(208): bankClass->addMember('8318', Array)
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php on line 54
+[03-Jun-2019 18:25:02 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'branch_code' at row 1' in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php:54
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php(54): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(208): bankClass->addMember('9118', Array)
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php on line 54
+[03-Jun-2019 19:24:03 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Palesa5' for key 'user_name'' in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php:202
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(202): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#2 [internal function]: logandregController->signUp()
+#3 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#4 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#5 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php on line 202
+[03-Jun-2019 20:46:45 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Yamodimomosweu02' for key 'user_name'' in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php:202
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(202): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#2 [internal function]: logandregController->signUp()
+#3 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#4 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#5 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php on line 202
+[03-Jun-2019 20:53:47 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Kenosi003' for key 'user_name'' in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php:202
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(202): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#2 [internal function]: logandregController->signUp()
+#3 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#4 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#5 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php on line 202
+[03-Jun-2019 23:04:36 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Musankati10' for key 'user_name'' in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php:202
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(202): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#2 [internal function]: logandregController->signUp()
+#3 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#4 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#5 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php on line 202
+[04-Jun-2019 14:51:01 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6105 = '11029',
+																	timestamp = '2019-06-04 14:51:01' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6105', '11029')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 14:52:49 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6105 = '11036',
+																	timestamp = '2019-06-04 14:52:49' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6105', '11036')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 14:53:45 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6329 = '11041',
+																	timestamp = '2019-06-04 14:53:45' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6329', '11041')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 14:54:44 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6105 = '11045',
+																	timestamp = '2019-06-04 14:54:44' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6105', '11045')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 14:56:34 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6105 = '11050',
+																	timestamp = '2019-06-04 14:56:34' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6105', '11050')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 14:57:15 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6329 = '11052',
+																	timestamp = '2019-06-04 14:57:15' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6329', '11052')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 14:58:05 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6105 = '11057',
+																	timestamp = '2019-06-04 14:58:05' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6105', '11057')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 14:59:30 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6329 = '11064',
+																	timestamp = '2019-06-04 14:59:30' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6329', '11064')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 14:59:46 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6105 = '11067',
+																	timestamp = '2019-06-04 14:59:46' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6105', '11067')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 15:46:46 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6329 = '11135',
+																	timestamp = '2019-06-04 15:46:45' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6329', '11135')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 15:50:43 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6329 = '11142',
+																	timestamp = '2019-06-04 15:50:43' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6329', '11142')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 18:53:45 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6366 = '11348',
+																	timestamp = '2019-06-04 18:53:45' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6366', '11348')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 18:56:15 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6366 = '11351',
+																	timestamp = '2019-06-04 18:56:15' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6366', '11351')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 18:58:42 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6366 = '11354',
+																	timestamp = '2019-06-04 18:58:42' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6366', '11354')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 19:00:50 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6366 = '11356',
+																	timestamp = '2019-06-04 19:00:50' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6366', '11356')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 19:03:48 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6366 = '11359',
+																	timestamp = '2019-06-04 19:03:48' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6366', '11359')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 19:06:04 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6366 = '11361',
+																	timestamp = '2019-06-04 19:06:04' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6366', '11361')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 21:18:37 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8238 = '11586',
+																	timestamp = '2019-06-04 21:18:37' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8238', '11586')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 21:19:31 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8238 = '11590',
+																	timestamp = '2019-06-04 21:19:31' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8238', '11590')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 21:20:49 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8238 = '11592',
+																	timestamp = '2019-06-04 21:20:49' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8238', '11592')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 21:21:54 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8238 = '11595',
+																	timestamp = '2019-06-04 21:21:54' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8238', '11595')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 21:23:06 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8238 = '11596',
+																	timestamp = '2019-06-04 21:23:06' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8238', '11596')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 21:24:09 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8238 = '11598',
+																	timestamp = '2019-06-04 21:24:08' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8238', '11598')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 22:08:24 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 6329 = '11731',
+																	timestamp = '2019-06-04 22:08:24' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('6329', '11731')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 22:26:26 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8318 = '11792',
+																	timestamp = '2019-06-04 22:26:23' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8318', '11792')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[04-Jun-2019 22:30:12 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8318 = '11802',
+																	timestamp = '2019-06-04 22:30:12' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8318', '11802')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[05-Jun-2019 07:40:38 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8318 = '12094',
+																	timestamp = '2019-06-05 07:40:38' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8318', '12094')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[05-Jun-2019 07:42:12 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Christinah01' for key 'user_name'' in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php:202
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(202): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#2 [internal function]: logandregController->signUp()
+#3 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#4 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#5 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php on line 202
+[05-Jun-2019 07:42:13 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8318 = '12097',
+																	timestamp = '2019-06-05 07:42:13' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8318', '12097')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[05-Jun-2019 07:45:26 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'found for user 8318 = '12098',
+																	timestamp = '2019-06-05 07:45:26' at line 2' in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php:289
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php(289): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(215): treeClass->placeDownliners('8318', '12098')
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/treeClass.php on line 289
+[09-Jun-2019 15:29:46 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Thato03' for key 'user_name'' in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php:202
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(202): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#2 [internal function]: logandregController->signUp()
+#3 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#4 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#5 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php on line 202
+[09-Jun-2019 16:34:17 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Kefilwe' for key 'user_name'' in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php:202
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(202): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#2 [internal function]: logandregController->signUp()
+#3 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#4 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#5 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php on line 202
+[10-Jun-2019 08:10:07 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'branch_code' at row 1' in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php:54
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php(54): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(208): bankClass->addMember('15330', Array)
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php on line 54
+[10-Jun-2019 14:24:16 Africa/Johannesburg] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'branch_code' at row 1' in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php:54
+Stack trace:
+#0 /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php(54): PDOStatement->execute(Array)
+#1 /home/isibayaagriwealt/public_html/app/core/classes/memberClass.php(208): bankClass->addMember('15775', Array)
+#2 /home/isibayaagriwealt/public_html/app/controller/logandregController.php(163): memberClass->addMember(Array)
+#3 [internal function]: logandregController->signUp()
+#4 /home/isibayaagriwealt/public_html/app/core/Application.php(16): call_user_func_array(Array, Array)
+#5 /home/isibayaagriwealt/public_html/index.php(10): Application->__construct()
+#6 {main}
+  thrown in /home/isibayaagriwealt/public_html/app/core/classes/bankClass.php on line 54

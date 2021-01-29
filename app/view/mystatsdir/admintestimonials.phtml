@@ -1,0 +1,114 @@
+<?php
+
+    $_m = new memberClass();
+    $_a = new allocationsClass();
+    
+
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+    $_d = new defaultsClass();
+
+?>
+<div class="container dash">	
+	<div class="row">	
+        <div class="col-md-3" id="navmenu">
+            <div class="dleft">
+                <div class="dleft_heading">Admin Menu</div>
+                <ul>
+                    <li><a href="/mystatsdir/admin">My Dashboard</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admindefaults">Defaults</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminmembers">Members</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminpayments">Payments</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/sendBulkEmail">Send bulk email</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/adminnotifications">News updates</a></li>
+                    <hr />
+                    <li><a href="/mystatsdir/admintestimonials">Testimonials</a></li>
+                </ul>
+                <div class="dleft_heading"> </div>
+                <ul>    
+                    <li><a href="/auth/logout/"><h style="color:red; font-weight:600;">Sign Out</h></a></li>
+                    <hr />      
+                </ul>
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div class="dright">
+                <div class="dright_heading">Testimonials</div>
+                <div class="body" style="overflow:auto;">
+                    <div id="error_message_testimonial">
+
+                        <?php
+				        	if(!empty($this->getMessage())){ //if($this->getMessage()<>''){ //if(!empty($this->getMessage())){
+				        		echo '';
+				        ?>
+				        		<div class="alert <?php echo $this->getMessageType(); ?>" role="alert">									
+  				        			<?php  echo $this->getMessage(); ?>
+				        		</div>
+				        <?php
+				        	}elseif(isset($_SESSION['MESSAGE'])){	
+                        ?>
+                                <div class="alert alert-success" role="alert">									
+                                      <?php  
+                                            echo $_SESSION['MESSAGE'];
+                                            unset($_SESSION['MESSAGE']);
+                                      ?>
+				        		</div>
+                        <?php
+				        	}	
+				        ?>
+                    </div>                                       
+                    <!--Start payment-->  
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="width:99%;background-color:white;padding:20px; border-radius:10px;">
+                                <strong>Send Testimony</strong>
+
+                                <div id="error_message_testimonial">
+
+                                </div>	
+                                <form action="/mystatsdir/addTestimonial" method="POST" enctype="multipart/form-data">
+                                    <input type="File" id = "files" accept=".pdf,.jpg,.jpeg,.png" name="POP" />  
+                                    <input class="btn btn-secondary btn-md"  type="submit" name="UPLOAD" value="Share" id="Testimonial" /> 			
+                                </form>                   
+                            <div style="width:99%;background-color:white;padding:20px; border-radius:10px;">
+                        </div>
+                    </div>
+                    <div class="row">                                                                  
+                        <?php
+                            $_testmn = new testimonialsClass();
+                            $stmt = $_testmn->displayTestimonialToBeApproved();
+
+                            $_counter = 0;
+                            $_a = 'Approved';
+                            $_d = 'Declined';
+
+                            while($_row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                $_counter += 1;
+                        ?>        
+                                <div class="col-md-3"> 
+                                    <img src="<?php echo $_row['testimony']?>" alt="testimonials" style="width:90%; margin:0 auto;padding:10px;"/>
+                                    <form action="/mystatsdir/deleteTestimonials" method="POST">
+                                        <input type="hidden" name="h_trans_id" value="<?php echo $_row['trans_id']?>" />
+                                        <button class="btn btn-outline-danger btn-sm" name="deleteTestimonials">Delete</button>
+                                    </form>
+                                </div>
+                                
+                        <?php        
+                            }
+                        ?>
+                    </div>
+                    
+                    <!--End payment-->                                                                        
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>

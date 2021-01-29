@@ -1,0 +1,47 @@
+<div style="margin-top:100px;">
+</div>
+<div class="container">
+    <div class="row">
+        <?php
+            $_obj = new memberClass();
+            $stmt = $_obj->getMemberDetails(ME);
+            $_row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $_obj = new bankClass();
+            $stmt = $_obj->getBankingDetails(ME);
+            $_row2 = $stmt->fetch(PDO::FETCH_ASSOC);
+        ?>              
+                <div class="col-md-6 offset-md-3">
+                    <a href="/mystatsdir/profile/"><button class="btn-outline-primary">Change personal info</button></a><br /><br />
+        			<div id="error_message">
+                	</div>	
+			<form action="" method="post" autocomplete="off" novalidate >	
+                <h5>Bank Account Information</h5>
+				<div class="form-group profile">      
+					<input class="form-control" name="AccHolder" value="<?php echo $_row2['accholder'];?>"  id="AccHolder" type="text" required />
+					<div id="accholder_tick">
+					</div> 
+					<label>Account Holder</label>
+					<div id="error_accholder"></div>
+  				</div>
+			  	<div class="form-group profile">      
+					<input class="form-control" name="Bank" value="<?php echo $_row2['bank'];?>"  id="Bank" type="text" required />
+					<div id="bank_tick">
+					</div> 
+					<label>Bank</label>
+					<div id="error_bank"></div>						
+				</div>
+				<div class="form-group profile">      
+					  <input class="form-control" name="AccNumber" value="<?php echo $_row2['accnumber'];?>"  id="AccNumber" type="text" required />
+					  <div id="accnumber_tick">
+					</div> 
+					<label>Account Number</label>
+					<div id="error_accnumber"></div>
+                </div>
+                <input class="btn btn-info float-right" type="button" name="UpdateBankingDetails" value="Update" id="UpdateBankingDetails" />			
+            </form>	     	
+                </div> 
+
+       
+</div>
+</div>

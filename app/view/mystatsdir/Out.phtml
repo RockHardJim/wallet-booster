@@ -1,0 +1,254 @@
+<?php
+
+    $_m = new memberClass();
+    $_a = new allocationsClass();
+    $_t = new treeClass();
+    $_i = new incentivesClass();
+    $_b = new bankClass();
+    
+    $_memberclass = new memberClass();
+    $_treeclass   = new treeClass();
+    $_allclass    = new allocationsClass();
+    $_fetch       = $_allclass->getAllocationsPaidOut(ME);
+    $_obj         = new allocationsClass();
+    $_results     = $_obj->getAllMemberAllocation(ME);
+
+
+?>
+<?php
+
+$_m = new memberClass();
+$_a = new allocationsClass();
+$_t = new treeClass();
+$_i = new incentivesClass();
+$_b = new bankClass();
+
+?>
+<div class="container dash">	
+<div class="row">	
+    <div class="col-md-3" id="navmenu">
+        <div class="dleft">
+            <div class="dleft_heading" >My menu</div>
+            <ul>
+                <li><a href="/mystatsdir/index">Dashboard</a></li>
+                <hr />
+                <li><a href="/mystatsdir/profile">Member Profile</a></li>
+                <hr />
+                <!--<hr />
+                <li><a href="/mystatsdir/Notifications">News update</a></li>
+                <hr />
+                <li><a href="/mystatsdir/Events">Upcoming events</a></li>-->                
+                <li><a href="/mystatsdir/In">Payments Received</a></li>
+                <hr />
+                <li><a href="/mystatsdir/Out">Payments Sent</a></li>  
+                <hr />              
+                <li><a href="/mystatsdir/tree">Tree</a></li>
+                <hr />
+                <li><a href="/mystatsdir/teamList">All team members</a></li> 
+                <hr />                                         
+            </ul>
+            <a href="/auth/logout/"><button class="btn btn-danger btn-sm btn-block">Sign Out</button></a>
+        </div>    
+        
+    </div>
+    <div class="col-md-9">
+        <div class="dright">
+            <div class="dright_heading">Payments sent</div>
+            <hr />
+            <div class="body">
+                <h6 style="text-align:right;font-size:15px;padding"><img src="/images/login.png" style="height:20px;">I am <strong><?php echo $_SESSION['username'];?></strong></h6>
+                    <div id="error_message">
+                    </div>
+                    
+                    <?php 
+                        if($_i->getUpgradeDue(ME)>0){
+                            $_row = $_i->getCurrentIncentive($_i->getUpgradeDue(ME))->fetch(PDO::FETCH_ASSOC);
+                            $_counter = 1;
+                    ?>
+                            <div style="background-color:#f9f9f9; padding:20px;border:1px solid green; border-radius:12px; margin:30px auto;">
+                                
+                                <h6 style="font-weight:bold;"><img src="/images/upgrade_icon.png" style="height:25px;margin-top:-10px;">&nbsp;Upgrade Alert</h6>
+                                <p style="margin-top:10px; font-weight:bold;font-size:17px;important;color:brown;">NOTE: You are due to upgrade to the next level
+
+                                    <!--<?php   
+                                            /*if(!$_a->sponsorhasUpgraded($_row['trans_id'])==''){
+                                                echo '<div style="border:1px solid red;padding:15px;margin-bottom:5px;">';
+                                                    echo '<h style="font-weight:400;color:red;">NB:'.$_a->sponsorhasUpgraded($_row['trans_id']).'</h>';
+                                                echo '</div>';
+                                            }*/                                                                                    
+                                    ?>-->
+                                    <form action="" method="" style="margin-left:10px;margin-top:10px! important;width:100%;text-align:center;">
+                                        <input type="hidden" id="<?php echo 'hidden_trans_no'.$_counter;?>" name="<?php echo 'hidden_trans_no'.$_counter;?>" value="<?php echo $_row['trans_id'];?>" />
+                                        <input style="margin-top:-5px;"
+                                            class="btn btn-secondary btn-md float-left" 
+                                            type="button" 
+                                            onclick = "return confirm('Are you sure?') ? upgradeFunction(<?php echo $_counter; ?>):''"
+                                            name="Upgrade" 
+                                            value=" I want to upgrade >>" 
+                                            id="<?php echo 'Upgrade'.$_counter;?>" 
+                                        />
+                                    </form>
+                                    <div style="clear:both;">
+                                    </div>
+                                </p>
+                            </div>
+                    <?php                        
+                        }                          
+                    ?>
+					<!--Start pasting here-->
+					<div class="row">
+                        <?php 
+                            $_counter = 0;
+                            $_dis = '';
+                            foreach($_fetch as $_row){
+                                $_counter += 1;
+                                if($_row['description']=='Reg Fee')
+                                    $_descr = 'Once off R400';
+                                elseif($_row['description']=='Stage 2')
+                                     $_descr = 'Jump to phase 2';
+                                elseif($_row['description']=='Stage 3')
+                                     $_descr = 'Jump to phase 3';
+                                elseif($_row['description']=='Stage 4')
+                                     $_descr = 'Jump to phase 4';
+                        ?>	    
+
+                                <div class="col-md-6" style="margin-bottom:15px; font-family:courier! important; padding:5px! important;">
+                                    <table style="background-color: #ffffde">
+                                        <tr style="background-color: <?php echo ($_row['status']=='Paid')?'green':'#b5013b'; ?>;font-size:18px! important;font-weight:bold; color:#fff">
+                                            <td colspan="2" style="text-align:center;border:1px solid #cecace;font-size:16px">
+                                             <?php echo ($_row['status']=='Paid')?'Paid':'Pending'; ?>
+                                            </td>
+                                        </tr>
+                                        <?php 
+                                            if ($_row['status']=='Pending'){
+                                        ?>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center;border:1px solid #cecace;color:black;font-weight:500; font-size:16px;">
+                                                        <?php echo 'Upliner: <strong><h style="color:navy">'.$_memberclass->getUsername($_row['receiver']).'</h></strong>'?><br />         
+                                                        <?php echo '<a href="tel:'.$_memberclass->getMobile($_row['receiver']).'">'.$_memberclass->getMobile($_row['receiver']).'</a>'?>                                                                               
+                                                    </td>
+                                                </tr>
+                                        <?php 
+                                            }
+                                        ?>
+                                        <tr>
+                                            <td colspan="2" style="text-align:center;border:1px solid #cecace;color:#660077;font-size:16px;">
+                                                <?php echo 'Upgraded : '.date('d M Y H:i:s',strtotime($_row['trans_date']))?>
+                                            </td>
+                                        </tr> 
+                                        <?php 
+                                            if ($_row['status']=='Paid'){
+                                        ?>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center;border:1px solid #cecace;color:#660077;font-size:16px;">
+                                                        <?php echo 'Approved : '; echo ($_row['status']=='Paid')?date('d M Y H:i:s',strtotime($_row['timestamp'])):'*******';?>
+                                                    </td>
+                                                </tr> 
+                                        <?php 
+                                            }
+                                        ?>                                       
+                                        <tr>
+                                            <td colspan="2" style="text-align:center;border:1px solid #cecace;font-size:16px; font-weight:bold;">
+                                                <?php echo 'R'.$_row['amount']?>
+                                            </td>
+                                        </tr>
+                                        
+                                        <?php 
+                                        if ($_row['status']=='Pending'){
+                                        ?>
+                                            <tr>
+                                                <th colspan="2" style="border:0px; text-align:center;font-size:14px;color:navy">------Upliner Banking Details------</th>
+                                            </tr>
+                                            <tr>
+                                                    <?php
+                                                        $_stmt = $_b->getBankingDetails($_row['receiver']);
+                                                        $_rows = $_stmt->fetch(PDO::FETCH_ASSOC);
+
+                                                    ?>
+                                                <td colspan="2" style="text-align:center;border:1px solid #cecace;">
+                                                    <?php echo 'Account Holder is <strong>'. $_rows['accholder'].'</strong>'?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;border:1px solid #cecace;">
+                                                    <?php echo 'Bank is <strong>'. $_rows['bank'].'</strong>'?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"style="text-align:center;border:1px solid #cecace;">
+                                                    <?php echo 'Account number is <strong>'. $_rows['accnumber'] .'</strong>'?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"style="text-align:center;border:1px solid #cecace;">
+                                                    <?php echo 'Branch code is <strong>'.$_rows['branch_code'].'</strong>'?>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                if($_b->hasBitcoin($_row['receiver'])){
+                                                if($_b->getBitcoin($_row['receiver'])<>''){
+                                            ?>
+                                                <tr>
+                                                    <td colspan="2"style="text-align:center;border:1px solid #cecace;">
+                                                        <?php echo 'Bitcoin Wallet is <br /><strong>'.$_b->getBitcoin($_row['receiver']).'</strong>'?>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                                }
+                                                }
+                                            ?>
+                                        <?php 
+                                        }
+                                        ?>
+                                         <tr>
+                                            <td colspan="2" style="text-align:center;border:1px solid #cecace;">
+                                                <?php 
+                                                     $datetime = date("Y-m-d H:i:s",strtotime($_row['trans_date']));
+
+                                                     // Convert datetime to Unix timestamp
+                                                     $timestamp = strtotime($datetime);
+                         
+                                                     // Subtract time from datetime
+                                                     $time = $timestamp + (12 * 60 * 60);
+                         
+                                                     // Date and time after subtraction
+                                                     $datetime = date("Y-m-d H:i:s", $time);
+                                                     
+                                                     //$_expired_time = date('Y/m/d H:m:s',strtotime('+13 hour',strtotime($_row['trans_date'])));
+                                                     //echo $_expired_time; Jan 5, 2021 15:37:25
+ 
+                                                     $_expired_time = date("Y/m/d H:i:s",strtotime($datetime));
+                                                ?>
+                                                <div style="color:red; border:opx solid red; font-weight:bold; font-size:14px;"id="<?php echo 'timer'.$_counter;?>">
+
+                                                </div>
+
+                                                <?php 
+                                                    if($_row['status']=='Paid'){
+                                                        echo '<br />';
+                                                    }else{
+                                                ?>
+                                                        <script type="text/javascript">
+                                                            //$(countdown_test(<?php echo $_counter;?>));
+                                                            $(countdown("<?php echo $_expired_time;?>","<?php echo $_counter;?>"));
+                                                        </script> 
+                                                <?php
+                                                    }
+                                                ?>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>  
+                        <?php 
+                            }
+                        ?>	
+                    </div>
+					<!--End pasting here -->
+                </div>                                                         
+            </div>            
+        </div>
+    </div>
+</div>
+
+
