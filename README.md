@@ -1,0 +1,1 @@
+I made this application to understand how mlm systems are created and how to effectively build network marketing communities i have removed the database and added a backdoor that reports back to a killswitch server to ensure no one uses this for illicit gains
